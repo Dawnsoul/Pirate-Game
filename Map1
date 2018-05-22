@@ -1,8 +1,11 @@
-public class Map
+package pirategame;
+
+public class Map1
 {
-
-
-
-
-
+    private int progress;
+    private int 
+    
+    
+    
+    
 }
