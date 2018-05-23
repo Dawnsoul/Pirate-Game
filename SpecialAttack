@@ -1,0 +1,30 @@
+package AttackInfo;
+
+/**
+ *
+ * @author 3004294
+ */
+
+public class SpecialAttack {
+    
+    protected String name;
+    protected double damage;
+   
+    
+    public SpecialAttack(String newName, double newDamage) {
+        name = newName;
+        damage = newDamage;
+        
+    }
+    
+    public String getName() {
+        return name;
+        
+    }
+    
+    public double getDamage() {
+        return damage;
+    }
+    
+    
+}
