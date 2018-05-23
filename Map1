@@ -3,12 +3,19 @@ package pirategame;
 public class Map1
 {
     private int progress;
-    private int 
+    public final int totalDistance = 100;
     
     public Map1()
     {
+        progress = 0;
+        
         
     }
     
+    public void sail()
+    {
+        int num = 0;
+        
+    }
     
 }
