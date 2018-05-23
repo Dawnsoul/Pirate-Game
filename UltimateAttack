@@ -1,0 +1,23 @@
+package AttackInfo;
+
+/**
+ *
+ * @author 3004294
+ */
+
+public class UltimateAttack extends SpecialAttack {
+    
+    protected double ultimateEffect;
+    
+    public UltimateAttack(String newName, double newDamage, double newUltimateEffect) {
+        super(newName, newDamage);
+        ultimateEffect = newUltimateEffect
+        
+    }
+    
+    public double getUltimateEffect() {
+        return ultimateEffect;
+        
+   
+    
+}
