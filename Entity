@@ -19,6 +19,7 @@ public class Entity {
     protected int buff; //stat increases that the monster can use on itself
     protected SpecialAttack spAtk; //a monster signature type
     protected boolean canHeal; //boolean statement to see if a monster can heal 
+    protected double damage;
 
     
     //constructor without attributes
@@ -31,6 +32,7 @@ public class Entity {
         buff = 0;
         spAtk = null;
         canHeal = false;
+        damage = 0;
      
         
     }
@@ -38,6 +40,7 @@ public class Entity {
     //constructor with all attributes
     public Entity(double newHealth, double newEnergy, double newEnergyRecovery, 
             Element newElement, int newRank, int newDebuff, int newBuff, SpecialAttack newSpecialAttack, boolean newCanHeal
+            , double newDamage
                    ) {
         health = newHealth;
         energy = newEnergy;
@@ -48,7 +51,17 @@ public class Entity {
         buff = newBuff;
         spAtk = newSpecialAttack;
         canHeal = newCanHeal;
+        damage = newDamage;
         
+    }
+    
+    public void setDamage(double newDamage) {
+        damage = newDamage;
+        
+    }
+    
+    public double getDamage() {
+        return damage;
     }
 
     public void incrementEnergy() { //method that allows the energy to be recovered --> needs to be used each interval of loop
