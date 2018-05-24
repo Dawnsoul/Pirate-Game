@@ -1,0 +1,20 @@
+package EntityInfo;
+
+/**
+ *
+ * @author 3004294
+ */
+
+public class Ship {
+    
+    protected double health;
+    protected double hullStatus;
+    protected int cannonAmount;
+    protected int cannonAmmo;
+    
+    
+    public Ship(double newHealth, double newHullStatus, int newCannonAmount, int newCannonAmmo) {
+        
+    }
+    
+}
