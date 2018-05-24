@@ -1,0 +1,153 @@
+package EntityInfo;
+
+import StatusInfo.Element;
+import AttackInfo.*;
+
+/**
+ *
+ * @author andy and jake
+ */
+
+public class Entity {
+    
+    protected double health; //health of the monster
+    protected double energy; //amount of energy required for a monster to use a attack
+    protected double energyRecovery; //amount of energy a monster recovers per turn
+    protected Element element; //element of the monster --- NEED TO FIX
+    protected int rank; //numbers inside are required to level up
+    protected int debuff; //debuffs that the monster can inflict on the pirate/hero
+    protected int buff; //stat increases that the monster can use on itself
+    protected SpecialAttack spAtk; //a monster signature type
+    protected boolean canHeal; //boolean statement to see if a monster can heal 
+
+    
+    //constructor without attributes
+    public Entity() {
+        health = 0;
+        energy = 0;
+        element = Element.Normal;
+        rank = 0;
+        debuff = 0;
+        buff = 0;
+        spAtk = null;
+        canHeal = false;
+     
+        
+    }
+
+    //constructor with all attributes
+    public Entity(double newHealth, double newEnergy, double newEnergyRecovery, 
+            Element newElement, int newRank, int newDebuff, int newBuff, SpecialAttack newSpecialAttack, boolean newCanHeal
+                   ) {
+        health = newHealth;
+        energy = newEnergy;
+        energyRecovery = newEnergyRecovery;
+        element = newElement;
+        rank = newRank;
+        debuff = newDebuff;
+        buff = newBuff;
+        spAtk = newSpecialAttack;
+        canHeal = newCanHeal;
+        
+    }
+
+    public void incrementEnergy() { //method that allows the energy to be recovered --> needs to be used each interval of loop
+        energy = energy + getEnergyRecovery();
+    }
+    
+    public void setEnergyRecovery(double newEnergyRecovery) {
+        energyRecovery = newEnergyRecovery;
+    }
+    
+    public double getEnergyRecovery() {
+        return energyRecovery;
+    }
+    
+    //setter for health
+    public void setHealth(int newHealth) {
+        health = newHealth;
+    }
+
+    //getter for health
+    public double getHealth() {
+        return health;
+    }
+
+    //setter for energy
+    public void setEnergy(int newEnergy) {
+        energy = newEnergy;
+    }
+
+    //getter for energy
+    public double getEnergy() {
+        return energy;
+    }
+
+    //setter for element
+    public void setElement(Element newElement) {
+        element = newElement;
+    }
+
+    //getter for element
+    public Element getElement() {
+        return element;
+    }
+
+    //setter for rank
+    public void setRank(int newRank) {
+        rank = newRank;
+    }
+
+    //getter for rank
+    public int getRank() {
+        return rank;
+    }
+
+    //setter for debuff
+    public void setDebuff(int newDebuff) {
+        debuff = newDebuff;
+    }
+
+    //getter for debuff
+    public int getDebuff() {
+        return debuff;
+    }
+
+    //setter for buff
+    public void setBuff(int newBuff) {
+        buff = newBuff;
+    }
+
+    //getter for buff
+    public int getBuff() {
+        return buff;
+    }
+
+    //setter for specialAtk
+    public void setSpecialAtk(String x, double y) {
+        spAtk = new SpecialAttack(x, y);
+    }
+
+    //getter for specialAtk
+    public void getSpecialAtkInfo() {
+        System.out.println("=================");
+        System.out.println("Skill Name : " + spAtk.getName());
+        System.out.println("Damage : " + spAtk.getDamage());
+    }
+
+    //setter for canHeal
+    public void setCanHeal(boolean newCanHeal) {
+        canHeal = newCanHeal;
+    }
+
+    //getter for canHeal
+    public boolean getCanHeal() {
+        return canHeal;
+    }
+    
+    //overrides toString method of Object class to neatly output Monster object
+    public String toString() {
+        return "health = " + health + "; " + "energy = " + energy + "; " + "element = " + element + "; " + "rank = " + rank + "; " + "debuff = " + debuff + "; " + "buff = " + buff + "; " + "specialAtk = " + spAtk + "; " + "canHeal = " + canHeal;
+    }
+
+}
