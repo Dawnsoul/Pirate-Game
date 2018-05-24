@@ -1,0 +1,27 @@
+package EntityInfo;
+
+import StatusInfo.Element;
+import AttackInfo.*;
+
+/**
+ *
+ * @author 3004294
+ */
+
+public class Pirate extends Entity { 
+    
+    public Pirate(double newHealth, double newEnergy, double newEnergyRecovery, Element newElement, 
+                  int newRank, int newDebuff, int newBuff, SpecialAttack newSpecialAttack, boolean canHeal, double newDamage) {
+            super(newHealth, newEnergy, newEnergyRecovery, newElement, newRank, newDebuff, newBuff, newSpecialAttack, canHeal, newDamage);
+            
+    }
+    
+    public void rankIncrementStats() { //use only when experience == next exp requirement in EXP chart, ill figure this shit out later
+        health = health + (health * .2);
+        energy = energy + (energy * .02);
+        energyRecovery = energyRecovery + (energyRecovery * .01);
+        rank = rank + 1;
+        damage = damage  +(damage * .3);
+                
+    }
+}    
