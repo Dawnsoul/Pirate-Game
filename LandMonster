@@ -1,0 +1,24 @@
+package EntityInfo;
+
+import StatusInfo.Element;
+import AttackInfo.*;
+
+/**
+ *
+ * @author 3004294
+ */
+
+public class LandMonster extends Entity{
+    
+    protected boolean reduceDamage;
+    
+    public LandMonster(double newHealth, double newEnergy, double newEnergyRecovery, Element newElement, int newRank, 
+                       int newDebuff, int newBuff, 
+                       SpecialAttack newSpecialAttack, boolean newCanHeal, boolean newReduceDamage) {
+        super(newHealth, newEnergy, newEnergyRecovery, newElement, newRank, newDebuff, newBuff, newSpecialAttack, newCanHeal);
+        //earth monster can be cancerous and call in a ally ONCE
+        reduceDamage = newReduceDamage;
+        
+    }
+    
+}
