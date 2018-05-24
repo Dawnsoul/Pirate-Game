@@ -19,7 +19,12 @@ public class Entity {
     protected int buff; //stat increases that the monster can use on itself
     protected SpecialAttack spAtk; //a monster signature type
     protected boolean canHeal; //boolean statement to see if a monster can heal 
-    protected double damage;
+    
+    /*
+    ill keep this as a variable bc i dont know how you want the damage to be, seeing how we have
+    a attack info. but if you want to make damage as a object, just remove it.
+    */
+    protected double damage; 
 
     
     //constructor without attributes
