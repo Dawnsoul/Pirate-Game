@@ -1,0 +1,5 @@
+package createclass;
+
+public enum Element {
+    Fire, Water, Earth, Air, Lgiht, Dark, Normal
+}
