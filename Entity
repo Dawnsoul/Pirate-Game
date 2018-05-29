@@ -14,8 +14,11 @@ public class Entity {
     
     protected String name;
     protected double health; //health of the monster
+    protected final int MAX_HEALTH = 100; //self explanatory
     protected double energy; //amount of energy required for a monster to use a attack
+    protected final int MAX_ENERGY = 100; //self explanatory
     protected double energyRecovery; //amount of energy a monster recovers per turn
+    protected final int MAX_ENERGY_RECOVERY = 10; //self explanatory
     protected Element element; //element of the monster --- NEED TO FIX
     protected int rank; //numbers inside are required to level up
     protected int debuff; //debuffs that the monster can inflict on the pirate/hero
