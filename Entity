@@ -176,12 +176,17 @@ public class Entity {
         return buff;
     }
 
-    /*
-    possibly dont need this, check specialAttack object class
-    */
     //setter for specialAtk
     public void setSpecialAtk(String x, double y) {
         spAtk = new SpecialAttack(x, y);
+    
+    }
+    
+    public void createRandomSpecialAttack() {
+        String x = "Special Attack";
+        double y = 25;
+        spAtk = new SpecialAttack(x, y);
+        
     }
 
     //getter for specialAtk
