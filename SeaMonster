@@ -2,6 +2,7 @@ package EntityInfo;
 
 import StatusInfo.Element;
 import AttackInfo.*;
+import java.util.Random;
 
 /**
  *
@@ -12,13 +13,35 @@ public class SeaMonster extends Entity{
     
     protected double seaShield;
     
+    private static String [] nameList = {"Shark", "Serpent", "Moby Dick", "Octopus", "Seagull"};
+    
     public SeaMonster(String newName, double newHealth, double newEnergy, double newEnergyRecovery, Element newElement, /*int newRank*/ 
                        int newDebuff, int newBuff, 
-                       SpecialAttack newSpecialAttack, boolean newCanHeal, double newDamage, double newSeaShield) {
+                       SpecialAttack newSpecialAttack, boolean newCanHeal, int newDamage, double newSeaShield) {
         super(newName, newHealth, newEnergy, newEnergyRecovery, newElement, /*newRank*/ newDebuff, newBuff, newSpecialAttack, newCanHeal, newDamage);
         //earth monster can be cancerous and call in a ally ONCE
         seaShield = newSeaShield;
         
+    }
+    
+    //random object generator
+    public static void createRandomEntity(Entity x) {
+        Random gen = new Random();
+        int y = gen.nextInt(5);
+        x.setName(nameList[y]);
+        
+        /*
+        the rest can be modified at the review process
+        */
+        x.setHealth(gen.nextInt(100) + 50);
+        x.setEnergy(gen.nextInt(50) + 50);
+        x.setEnergyRecovery(gen.nextInt(5));
+        x.setElement(Element.Normal);
+        x.setDebuff(0);
+        x.setBuff(0);
+        x.setSpecialAttack("", 0); // WTF <--- NEEDS TO BE FIXED
+        x.setDamage(gen.nextInt(15) + 1);
+     
     }
     
 }
