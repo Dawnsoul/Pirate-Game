@@ -12,10 +12,10 @@ public class SeaMonster extends Entity{
     
     protected double seaShield;
     
-    public SeaMonster(double newHealth, double newEnergy, double newEnergyRecovery, Element newElement, int newRank, 
+    public SeaMonster(String newName, double newHealth, double newEnergy, double newEnergyRecovery, Element newElement, /*int newRank*/ 
                        int newDebuff, int newBuff, 
-                       SpecialAttack newSpecialAttack, boolean newCanHeal, double newSeaShield) {
-        super(newHealth, newEnergy, newEnergyRecovery, newElement, newRank, newDebuff, newBuff, newSpecialAttack, newCanHeal);
+                       SpecialAttack newSpecialAttack, boolean newCanHeal, double newDamage, double newSeaShield) {
+        super(newName, newHealth, newEnergy, newEnergyRecovery, newElement, /*newRank*/ newDebuff, newBuff, newSpecialAttack, newCanHeal, newDamage);
         //earth monster can be cancerous and call in a ally ONCE
         seaShield = newSeaShield;
         
