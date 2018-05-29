@@ -2,6 +2,7 @@ package EntityInfo;
 
 import StatusInfo.Element;
 import AttackInfo.*;
+import java.util.*;
 
 /**
  *
@@ -10,6 +11,7 @@ import AttackInfo.*;
 
 public class Entity {
     
+    protected String name;
     protected double health; //health of the monster
     protected double energy; //amount of energy required for a monster to use a attack
     protected double energyRecovery; //amount of energy a monster recovers per turn
@@ -25,14 +27,17 @@ public class Entity {
     a attack info. but if you want to make damage as a object, just remove it.
     */
     protected double damage; 
+    
+    Random gen = new Random();
 
     
     //constructor without attributes
     public Entity() {
+        name = null;
         health = 0;
         energy = 0;
         element = Element.Normal;
-        rank = 0;
+        /*rank = 0;*/
         debuff = 0;
         buff = 0;
         spAtk = null;
@@ -43,21 +48,31 @@ public class Entity {
     }
 
     //constructor with all attributes
-    public Entity(double newHealth, double newEnergy, double newEnergyRecovery, 
-            Element newElement, int newRank, int newDebuff, int newBuff, SpecialAttack newSpecialAttack, boolean newCanHeal
+    public Entity(String newName, double newHealth, double newEnergy, double newEnergyRecovery, 
+            Element newElement, /*int newRank*/ int newDebuff, int newBuff, SpecialAttack newSpecialAttack, boolean newCanHeal
             , double newDamage
                    ) {
+        name = newName;
         health = newHealth;
         energy = newEnergy;
         energyRecovery = newEnergyRecovery;
         element = newElement;
-        rank = newRank;
+        //rank = newRank;
         debuff = newDebuff;
         buff = newBuff;
         spAtk = newSpecialAttack;
         canHeal = newCanHeal;
         damage = newDamage;
         
+    }
+    
+    public void createRandomEntity(Entity x) {
+        x.name = "Entity";
+        x.health = gen.nextInt(100) + 50;
+        x.energy = gen.nextInt(50) + 50;
+        x.energyRecovery = gen.nextInt(5);
+        x.element = Element.Normal;
+     
     }
     
     public void setDamage(double newDamage) {
