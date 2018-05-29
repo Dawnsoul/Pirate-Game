@@ -4,6 +4,7 @@ import StatusInfo.Element;
 import AttackInfo.*;
 import java.util.*;
 
+
 /**
  *
  * @author andy and jake
@@ -26,10 +27,9 @@ public class Entity {
     ill keep this as a variable bc i dont know how you want the damage to be, seeing how we have
     a attack info. but if you want to make damage as a object, just remove it.
     */
-    protected double damage; 
+    protected int damage; 
+    protected int time = 0;
     
-    Random gen = new Random();
-
     
     //constructor without attributes
     public Entity() {
@@ -50,7 +50,7 @@ public class Entity {
     //constructor with all attributes
     public Entity(String newName, double newHealth, double newEnergy, double newEnergyRecovery, 
             Element newElement, /*int newRank*/ int newDebuff, int newBuff, SpecialAttack newSpecialAttack, boolean newCanHeal
-            , double newDamage
+            , int newDamage
                    ) {
         name = newName;
         health = newHealth;
@@ -66,21 +66,38 @@ public class Entity {
         
     }
     
-    public void createRandomEntity(Entity x) {
-        x.name = "Entity";
-        x.health = gen.nextInt(100) + 50;
-        x.energy = gen.nextInt(50) + 50;
-        x.energyRecovery = gen.nextInt(5);
-        x.element = Element.Normal;
+    //random object generator
+    public static void createRandomEntity(Entity x) {
+        Random gen = new Random();
+        x.setName("Entity");
+        x.setHealth(gen.nextInt(100) + 50);
+        x.setEnergy(gen.nextInt(50) + 50);
+        x.setEnergyRecovery(gen.nextInt(5));
+        x.setElement(Element.Normal);
+        x.setDebuff(0);
+        x.setBuff(0);
+        x.setSpecialAttack("", 0); // WTF <--- NEEDS TO BE FIXED
+        x.setDamage(gen.nextInt(15) + 1);
      
     }
     
-    public void setDamage(double newDamage) {
+    
+    public void setName(String newName) {
+        name = newName;
+        
+    }
+    
+    public String getName() {
+        return name;
+        
+    }
+    
+    public void setDamage(int newDamage) {
         damage = newDamage;
         
     }
     
-    public double getDamage() {
+    public int getDamage() {
         return damage;
     }
 
@@ -156,6 +173,9 @@ public class Entity {
         return buff;
     }
 
+    /*
+    possibly dont need this, check specialAttack object class
+    */
     //setter for specialAtk
     public void setSpecialAtk(String x, double y) {
         spAtk = new SpecialAttack(x, y);
