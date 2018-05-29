@@ -12,10 +12,10 @@ public class LandMonster extends Entity{
     
     protected boolean reduceDamage;
     
-    public LandMonster(double newHealth, double newEnergy, double newEnergyRecovery, Element newElement, int newRank, 
+    public LandMonster(String newName, double newHealth, double newEnergy, double newEnergyRecovery, Element newElement, /*int newRank*/ 
                        int newDebuff, int newBuff, 
-                       SpecialAttack newSpecialAttack, boolean newCanHeal, boolean newReduceDamage) {
-        super(newHealth, newEnergy, newEnergyRecovery, newElement, newRank, newDebuff, newBuff, newSpecialAttack, newCanHeal);
+                       SpecialAttack newSpecialAttack, boolean newCanHeal, double newDamage, boolean newReduceDamage) {
+        super(newName, newHealth, newEnergy, newEnergyRecovery, newElement, /*newRank*/ newDebuff, newBuff, newSpecialAttack, newCanHeal, newDamage);
         //earth monster can be cancerous and call in a ally ONCE
         reduceDamage = newReduceDamage;
         
