@@ -12,7 +12,7 @@ import java.util.*;
 
 public class Entity {
     
-    protected String name;
+    protected String name; //name of entity
     protected double health; //health of the monster
     protected final int MAX_HEALTH = 100; //self explanatory
     protected double energy; //amount of energy required for a monster to use a attack
@@ -31,7 +31,7 @@ public class Entity {
     a attack info. but if you want to make damage as a object, just remove it.
     */
     protected int damage; 
-    protected int time = 0;
+    private int time = 0;
     
     
     //constructor without attributes
@@ -84,22 +84,24 @@ public class Entity {
      
     }
     
-    
+    //setter for name
     public void setName(String newName) {
         name = newName;
         
     }
     
+    //getter for name
     public String getName() {
         return name;
         
     }
-    
+    //setter for damage
     public void setDamage(int newDamage) {
         damage = newDamage;
         
     }
     
+    //getter for damage
     public int getDamage() {
         return damage;
     }
@@ -108,10 +110,12 @@ public class Entity {
         energy = energy + getEnergyRecovery();
     }
     
+    //setter for energyrecovery
     public void setEnergyRecovery(double newEnergyRecovery) {
         energyRecovery = newEnergyRecovery;
     }
     
+    //coolio getter
     public double getEnergyRecovery() {
         return energyRecovery;
     }
@@ -182,6 +186,7 @@ public class Entity {
     
     }
     
+    //creates a wack ass special attack object
     public void createRandomSpecialAttack() {
         String x = "Special Attack";
         double y = 25;
