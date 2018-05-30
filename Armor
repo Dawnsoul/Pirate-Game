@@ -1,0 +1,42 @@
+//jake Truongcao
+package pirategame;
+
+import java.util.*;
+
+public class Armor extends Item {
+    private String name;
+    private int dmgMit;
+    
+    //constructor without attributes
+    public Armor() {
+        super();
+        dmgMit = 0;
+    }
+
+    //constructor with all attributes
+    public Armor(ArrayList<String> randNames, int newDmgMit) {
+        super(randNames.get((int)(20*Math.random())), 1);
+        dmgMit = newDmgMit;
+    }
+
+    //setter for dmgMit
+    public void setDmgMit(int newDmgMit) {
+        dmgMit = newDmgMit;
+    }
+
+    //getter for dmgMit
+    public int getDmgMit() {
+        return dmgMit;
+    }
+
+    //overrides toString method of Object class to neatly output Weapon object
+    public String toString() {
+        return "name = " + name + "; " + "dmgMit = " + dmgMit;
+    }
+    
+    public static Armor randArmor()
+    {
+        return new Armor();
+    }
+
+}
