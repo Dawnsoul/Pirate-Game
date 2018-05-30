@@ -1,0 +1,45 @@
+//Jake Truongcao
+package pirategame;
+
+public class Item {
+    private String name;
+    private int price;
+
+    //constructor without attributes
+    public Item() {
+        name = null;
+        price = 0;
+    }
+
+    //constructor with all attributes
+    public Item(String newName, int newPrice) {
+        name = newName;
+        price = newPrice;
+    }
+
+    //setter for name
+    public void setName(String newName) {
+        name = newName;
+    }
+
+    //getter for name
+    public String getName() {
+        return name;
+    }
+
+    //setter for price
+    public void setPrice(int newPrice) {
+        price = newPrice;
+    }
+
+    //getter for price
+    public int getPrice() {
+        return price;
+    }
+
+    //overrides toString method of Object class to neatly output Item object
+    public String toString() {
+        return "name = " + name + "; " + "price = " + price;
+    }
+
+}
