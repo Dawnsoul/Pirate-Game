@@ -1,0 +1,14 @@
+//Jake Truongcao
+package pirategame;
+
+public class Consumable extends Item{
+    //need to have a way to indicate what stats are being adjusted
+    
+    public Consumable(String newName, int newPrice)
+    {
+        super(newName, newPrice);
+    }
+    
+    //use method will take in an entity and return the entity with adjusted stats.
+    //possibly have timed items
+}
