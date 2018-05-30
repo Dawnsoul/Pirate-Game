@@ -1,0 +1,73 @@
+//Jake Truongcao
+package pirategame;
+
+import java.util.ArrayList;
+
+public class SpecialLocation {
+    private String name;
+    private int location;
+    private ArrayList<Item> loot;
+    private ArrayList<Monster> monsters;
+
+    //constructor without attributes
+    public SpecialLocation() {
+        name = null;
+        location = 0;
+        loot = new ArrayList<Item>();
+        monsters = new ArrayList<Monster>();
+    }
+
+    //constructor with all attributes
+    public SpecialLocation(String newName, int newLocation, ArrayList<Item> newLoot, ArrayList<Monster> newMonsters) {
+        name = newName;
+        location = newLocation;
+        loot = newLoot;
+        monsters = newMonsters;
+    }
+
+    //setter for name
+    public void setName(String newName) {
+        name = newName;
+    }
+
+    //getter for name
+    public String getName() {
+        return name;
+    }
+
+    //setter for location
+    public void setLocation(int newLocation) {
+        location = newLocation;
+    }
+
+    //getter for location
+    public int getLocation() {
+        return location;
+    }
+
+    //setter for loot
+    public void setLoot(ArrayList<Item> newLoot) {
+        loot = newLoot;
+    }
+
+    //getter for loot
+    public ArrayList<Item> getLoot() {
+        return loot;
+    }
+
+    //setter for monsters
+    public void setMonsters(ArrayList<Monster> newMonsters) {
+        monsters = newMonsters;
+    }
+
+    //getter for monsters
+    public ArrayList<Monster> getMonsters() {
+        return monsters;
+    }
+
+    //overrides toString method of Object class to neatly output SpecialLocation object
+    public String toString() {
+        return "name = " + name + "; " + "location = " + location + "; " + "loot = " + loot + "; " + "monsters = " + monsters;
+    }
+
+}
