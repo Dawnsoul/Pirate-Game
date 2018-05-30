@@ -1,11 +1,24 @@
+//Jake Truongcao
 package pirategame;
+
+import java.util.*;
 
 public class Map1
 {
     private int progress;
     public final int totalDistance = 100;
+    private ArrayList<SpecialLocation> locations;
+    private ArrayList<String> placeNames = new ArrayList<String>(Arrays.asList
+        ("The Outcast Haven", "The Mighty Isles", "The Infernal Islands", 
+        "The Boisterous Island", "Vrahz Ait", "Irf Atoll", "Sihr Atoll", 
+        "Eems Archipelago", "Cremuz Archipelago", "Tryohst Enclave", 
+        "The Neverending Key", "The Victory Peninsula", "The Enchanted Key", 
+        "The Sandy Skerry", "Yst Enclave", "Erd Archipelago", 
+        "Firb Atoll", "Futohx Chain", "Drifam Atoll", 
+        "Tryfaq Enclave"));
     
-    public Map1()
+    //takes in difficulty and generates map
+    public Map1(int difficulty)
     {
         progress = 0;
         
@@ -14,8 +27,22 @@ public class Map1
     
     public void sail()
     {
-        int num = 0;
+        progress += 5 + (int)(Math.random() * 11);//5-15 naut miles taken
         
+    }
+    
+    public void easyMap(int difficulty)
+    {
+        int temp = 100;
+        for(int x = 0; x < difficulty - 1; x++)
+        {
+            //special location requires location and monster list
+            locations.add(new SpecialLocation(
+                    placeNames.get((placeNames.size() - 1) * (int)(Math.random())), 
+                    totalDistance - (x * (totalDistance / difficulty)), 
+                    new ArrayList<Item>(), 
+                    new ArrayList<Monster>()));
+        }
     }
     
 }
