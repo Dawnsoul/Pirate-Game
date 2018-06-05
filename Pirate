@@ -8,29 +8,33 @@ import AttackInfo.*;
  * @author 3004294
  */
 
+/*
+Change Log #1 :
+I removed the Experience Bar due to the lack of content in length so there is no need, however the incrementstats can be used for another thing.
+
+
+*/
+
 public class Pirate extends Entity { 
     
-    protected double experience [] = {0, 15, 25, 35, 45, 55, 65, 75, 85, 95, 105};
-    protected double experienceCount = 0;
+    protected String status = null;
     
-    public Pirate(double newHealth, double newEnergy, double newEnergyRecovery, Element newElement, 
-                  int newRank, int newDebuff, int newBuff, SpecialAttack newSpecialAttack, boolean canHeal, double newDamage
-                , double newExperienceCount) {
-            super(newHealth, newEnergy, newEnergyRecovery, newElement, newRank, newDebuff, newBuff, newSpecialAttack, canHeal, newDamage);
-            experienceCount = newExperienceCount; //
+    public Pirate(String newName, double newHealth, double newEnergy, double newEnergyRecovery, Element newElement, 
+                  int newDebuff, int newBuff, SpecialAttack newSpecialAttack, boolean canHeal, double newDamage
+                , String newStatus) {
+            super(newName, newHealth, newEnergy, newEnergyRecovery, newElement, newDebuff, newBuff, newSpecialAttack, canHeal, newDamage);
+            status = newStatus; // roles such as captain, medical, etc, doesnt really affect the game but sounds nice and quick to add
+            
     }
     
-    public void rankIncrementStats() { //use only when experience == next exp requirement in EXP chart, ill figure this shit out later
+    public void rankIncrementStats() { //unsure if used.
         health = health + (health * .2);
         energy = energy + (energy * .02);
         energyRecovery = energyRecovery + (energyRecovery * .01);
         rank = rank + 1;
         damage = damage  +(damage * .3);
-        experienceCount = 0;
                 
     }
     
-    public void checkExperience() {
-        if()
-    }
+    
 }    
