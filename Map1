@@ -7,6 +7,9 @@ import EntityInfo.*;
 /*
 Change Log #1 :
 Fixed the package importation error and changed the necessar Array List
+
+Change Log #2 : 
+Changed Island names :))))
 */
 
 public class Map
@@ -15,12 +18,12 @@ public class Map
     public final int totalDistance = 100;
     private ArrayList<SpecialLocation> locations;
     private ArrayList<String> placeNames = new ArrayList<String>(Arrays.asList
-        ("The Outcast Haven", "The Mighty Isles", "The Infernal Islands", 
-        "The Boisterous Island", "Vrahz Ait", "Irf Atoll", "Sihr Atoll", 
+        ("Conomi Islands", "The Mighty Isles", "The Infernal Islands", 
+        "West Blue", "Vrahz Ait", "Irf Atoll", "Swallow Island", 
         "Eems Archipelago", "Cremuz Archipelago", "Tryohst Enclave", 
-        "The Neverending Key", "The Victory Peninsula", "The Enchanted Key", 
-        "The Sandy Skerry", "Yst Enclave", "Erd Archipelago", 
-        "Firb Atoll", "Futohx Chain", "Drifam Atoll", 
+        "The Neverending Key", "Dressrosa", "The Enchanted Key", 
+        "The Sandy Skerry", "Yst Enclave", "Alabasta", 
+        "Marine Ford", "Futohx Chain", "Wano Country", 
         "Tryfaq Enclave"));
     
     //takes in difficulty and generates map
