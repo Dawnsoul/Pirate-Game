@@ -5,15 +5,71 @@ package EntityInfo;
  * @author 3004294
  */
 
+/*
+Change Log #1 :
+Created the setters and getters, however it needs to be noted that cannon damage is permanent, only cannonAmount should be increased
+*/
+
 public class Ship {
     
-    protected double health;
-    protected double hullStatus;
-    protected int cannonAmount;
-    protected int cannonAmmo;
+    protected double hullStatus; //health
+    protected int cannonAmount; //amount of cannons on ship, damage multipler
+    protected int cannonAmmo; //amount of times a cannon can be shot
+    protected int cannonDamage; //value needs to be low. because (dmg * amount) = ??
+    protected double speed; //how fast a cannon shoot
     
     
-    public Ship(double newHealth, double newHullStatus, int newCannonAmount, int newCannonAmmo) {
+    public Ship(double newHullStatus, int newCannonAmount, int newCannonAmmo, int newCannonDamage, double newSpeed) {
+        hullStatus = newHullStatus;
+        cannonAmount = newCannonAmount;
+        cannonAmmo = newCannonAmmo;
+        cannonDamage = (newCannonAmount * newCannonDamage);
+        speed = newSpeed;
+        
+    }
+    
+    public double getHullStatus() {
+        return hullStatus;
+        
+    }
+    
+    public int getCannonAmount() {
+        return cannonAmount;
+        
+    }
+    
+    public int getCannonAmmo() {
+        return cannonAmmo;
+        
+    }
+    
+    public int getCannonDamage() {
+        return cannonDamage;
+        
+    }
+    
+    public double getSpeed() {
+        return speed;
+        
+    }
+    
+    public void setHullStatus(double newHullStatus) {
+        hullStatus = newHullStatus;
+        
+    }
+    
+    public void setCannonAmount(int newCannonAmount) {
+        cannonAmount = newCannonAmount;
+        
+    }
+    
+    public void setCannonAmmo(int newCannonAmmo) {
+        cannonAmmo = newCannonAmmo;
+        
+    }
+    
+    public void setSpeed(int newSpeed) {
+        speed = newSpeed;
         
     }
     
