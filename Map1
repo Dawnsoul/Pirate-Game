@@ -1,9 +1,15 @@
-//Jake Truongcao
-package pirategame;
+package MapInfo;
 
 import java.util.*;
+import ItemInfo.*;
+import EntityInfo.*;
 
-public class Map1
+/*
+Change Log #1 :
+Fixed the package importation error and changed the necessar Array List
+*/
+
+public class Map
 {
     private int progress;
     public final int totalDistance = 100;
@@ -18,7 +24,7 @@ public class Map1
         "Tryfaq Enclave"));
     
     //takes in difficulty and generates map
-    public Map1(int difficulty)
+    public Map(int difficulty)
     {
         progress = 0;
         
@@ -41,7 +47,7 @@ public class Map1
                     placeNames.get((placeNames.size() - 1) * (int)(Math.random())), 
                     totalDistance - (x * (totalDistance / difficulty)), 
                     new ArrayList<Item>(), 
-                    new ArrayList<Monster>()));
+                    new ArrayList<Entity>()));
         }
     }
     
