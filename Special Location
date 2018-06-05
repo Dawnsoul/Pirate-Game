@@ -1,24 +1,36 @@
-//Jake Truongcao
-package pirategame;
+package MapInfo;
 
 import java.util.ArrayList;
+import ItemInfo.*;
+import EntityInfo.*;
+
+
+/*
+Change Log #1 : 
+I imported in the necessary packages for the ArrayLists to work, and I changed ArrayList<Monster> to Arraylist<Entity>. 
+We need to check if this SpecialLocation accounts for Land/Sea Monsters.
+
+
+
+*/
+
 
 public class SpecialLocation {
     private String name;
     private int location;
     private ArrayList<Item> loot;
-    private ArrayList<Monster> monsters;
+    private ArrayList<Entity> monsters;
 
     //constructor without attributes
     public SpecialLocation() {
         name = null;
         location = 0;
         loot = new ArrayList<Item>();
-        monsters = new ArrayList<Monster>();
+        monsters = new ArrayList<Entity>();
     }
 
     //constructor with all attributes
-    public SpecialLocation(String newName, int newLocation, ArrayList<Item> newLoot, ArrayList<Monster> newMonsters) {
+    public SpecialLocation(String newName, int newLocation, ArrayList<Item> newLoot, ArrayList<Entity> newMonsters) {
         name = newName;
         location = newLocation;
         loot = newLoot;
@@ -56,12 +68,12 @@ public class SpecialLocation {
     }
 
     //setter for monsters
-    public void setMonsters(ArrayList<Monster> newMonsters) {
+    public void setMonsters(ArrayList<Entity> newMonsters) {
         monsters = newMonsters;
     }
 
     //getter for monsters
-    public ArrayList<Monster> getMonsters() {
+    public ArrayList<Entity> getMonsters() {
         return monsters;
     }
 
