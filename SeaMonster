@@ -45,6 +45,9 @@ Change Log #7 :
 - TEMP Remove Element
 - TEMP Remove Buff
 - TEMP Remove Debuff
+
+Change Log #8 :
+- Added Energy Costs
 */
 
 public class SeaMonster extends Entity{
@@ -57,12 +60,13 @@ public class SeaMonster extends Entity{
     private String [] SMArray = {"Raise The Seas", "Origin Pulse", "Hydro Devastation", "Call the Wind", "Swallow the World"};
     private String [] SMDArray = {"The seas begin to swell, and waves crash down on you...", "Water begins to rise from the seas and they explode...", "The sea begins to rise and form a huge sphere, and then it slowly descends upon you...",
                          "The wind begins to pick up rapidly and then a hurricane of water forms near you...", "The sea begins to turn, faster and faster as you are caught in a whirlpool..."};
+    int [] SMCArray = {5, 4, 7, 6, 10};
     int [] SMDMGArray = {30, 20, 40, 25, 50}; // BATTLE SEQUENCE
     
     public SeaMonster(String newName, double newHealth, double newEnergyRecovery, Element newElement, /*int newRank*/ 
                        int newDebuff, int newBuff, 
-                       /*SpecialAttack newSpecialAttack,*/ boolean newCanHeal, int newDamage, double newSeaShield) {
-        super(newName, newHealth, newEnergyRecovery, /*newElement, newRank newDebuff, newBuff, newSpecialAttack,*/ newCanHeal, newDamage);
+                       /*SpecialAttack newSpecialAttack, boolean newCanHeal8*/ int newDamage, double newSeaShield) {
+        super(newName, newHealth, newEnergyRecovery, /*newElement, newRank newDebuff, newBuff, newSpecialAttack, newCanHeal*/ newDamage);
         //earth monster can be cancerous and call in a ally ONCE
         seaShield = newSeaShield;
         
@@ -91,6 +95,7 @@ public class SeaMonster extends Entity{
     public void specialAttack() { //flavor text
             System.out.println("The monster has used its special attack...");
             int y = gen.nextInt(5);
+            energy = energy - SMCArray[y];
             JOptionPane.showMessageDialog(null, SMArray[y]);
             System.out.println(SMDArray[y]);
             
