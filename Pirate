@@ -14,6 +14,9 @@ I removed the Experience Bar due to the lack of content in length so there is no
 
 Change Log #2 :
 Adding the armor objects  for the pirate to equip shit
+
+Changelog #3 :
+Added setters and getters for armor
 */
 
 public class Pirate extends Entity { 
@@ -27,6 +30,7 @@ public class Pirate extends Entity {
     public Pirate(String newName, double newHealth, double newEnergy, double newEnergyRecovery, Element newElement, 
                   int newDebuff, int newBuff, SpecialAttack newSpecialAttack, boolean canHeal, double newDamage
                 , String newStatus, Armor newHat, Armor newShirt, Armor newPant, Armor newShoe) {
+                
             super(newName, newHealth, newEnergy, newEnergyRecovery, newElement, newDebuff, newBuff, newSpecialAttack, canHeal, newDamage);
             status = newStatus; // roles such as captain, medical, etc, doesnt really affect the game but sounds nice and quick to add
             hat = newHat;
@@ -34,6 +38,46 @@ public class Pirate extends Entity {
             pant = newPant;
             shoe = newShoe;
             
+    }
+    
+    //setter for hat
+    public void setHat(Armor newHat) {
+        hat = newHat;
+    }
+
+    //getter for hat
+    public Armor getHat() {
+        return hat;
+    }
+
+    //setter for shirt
+    public void setShirt(Armor newShirt) {
+        shirt = newShirt;
+    }
+
+    //getter for shirt
+    public Armor getShirt() {
+        return shirt;
+    }
+
+    //setter for pant
+    public void setPant(Armor newPant) {
+        pant = newPant;
+    }
+
+    //getter for pant
+    public Armor getPant() {
+        return pant;
+    }
+
+    //setter for shoe
+    public void setShoe(Armor newShoe) {
+        shoe = newShoe;
+    }
+
+    //getter for shoe
+    public Armor getShoe() {
+        return shoe;
     }
     
     public void rankIncrementStats() { //unsure if used.
