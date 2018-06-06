@@ -12,6 +12,46 @@ Change Log #2 :
 Changed Island names :))))
 */
 
+/*
+    //Names of Clothing
+    private ArrayList<String> clothingNames = new ArrayList<String>(Arrays.asList
+            ("Boot", "Belt", "Breeches", "Doublet", "Tri-Cornered Hat"
+            , "Motley Shirt"));
+    
+    //Names of Weapons
+    
+    private ArrayList<String> weaponNames = new ArrayList<String>(Arrays.asList
+            ("Cutlass", "Rapier", "Dagger", "Pike", "Axe"
+            , "Revolver", "Flintlock", "Blunderbuss", "Musket"));
+    */
+    
+    //Names of sea monsters
+    
+    
+    //Names of land monsters
+    
+    
+    //Adjectives Below
+    //Fire
+    
+    
+    //Water
+    
+    
+    //Earth
+    
+    
+    //Air
+    
+    
+    //Light
+    
+    
+    //Dark
+    
+    
+    //takes in difficulty and generates map
+    
 public class Map
 {
     private int progress;
