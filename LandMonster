@@ -1,20 +1,40 @@
 package EntityInfo;
 
-import StatusInfo.Element;
 import AttackInfo.*;
 import java.util.Random;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author 3004294
  */
 
+/*
+Change Log #1 :
+- Added in Arrays for Special Attack names, descriptions, Damage
+- Added in Random Generator
+- Added in JOptionPane
+- Added in Flavor Text Method
+- Modified createRandomEntity to removed
+- TEMP Removed Debuff/Buff
+- TEMP Remove Element
+
+AUTHOR COMMENT :
+I don't even have the slightest clue of how a Goblin or a Scorpion can cause a earthquake, but I'm gonna go with it.
+
+*/
+
+
+
 public class LandMonster extends Entity{
     
     protected boolean reduceDamage;
+    Random gen = new Random();
     
     private static String [] nameList = {"Skeleton", "Goblin", "Thief", "Scorpion", "Water Balloon"};
-    
+    private String [] LMArray = {"Shake the Earth", "Mountain Bash", "Boulder Throw"};
+    private String [] LMDArray = {"The land begins to shake as a earth quake ravages throughout the land.", "A huge rock falls ontop of you and explodes...", "You just got hit by a boulder."};
+    int [] LMDMGArray = {20, 30, 25};
     
     public LandMonster(String newName, double newHealth, double newEnergy, double newEnergyRecovery, Element newElement, /*int newRank*/ 
                        int newDebuff, int newBuff, 
@@ -39,11 +59,19 @@ public class LandMonster extends Entity{
         x.setHealth(gen.nextInt(100) + 50);
         x.setEnergy(gen.nextInt(50) + 50);
         x.setEnergyRecovery(gen.nextInt(5));
-        x.setElement(Element.Normal);
-        x.setDebuff(0);
-        x.setBuff(0);
-        x.setSpecialAttack("", 0); // WTF <--- NEEDS TO BE FIXED
+        //x.setElement(Element.Normal);
+        //x.setDebuff(0);
+        //x.setBuff(0);
         x.setDamage(gen.nextInt(15) + 1);
+        
      
+    }
+    
+    public void specialAttack() { //flavor text
+            System.out.println("The monster has used its special attack...");
+            int y = gen.nextInt(3);
+            JOptionPane.showMessageDialog(null, LMArray[y]);
+            System.out.println(LMDArray[y]);
+            
     }
 }
