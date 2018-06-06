@@ -8,7 +8,27 @@ import javax.swing.*;
 /**
  *
  * @author 3004294
- */
+ *
+
+/*
+Change Log #1 :
+- Removed Experience
+- Removed Rank
+
+Change Log #2 :
+- Modified createRandomEntity --> Removed Generic SPATK
+- Added in Flavor Text : Special Attack Method
+- Added in Special Attack Names, Descriptions, Damage
+- Added in Random generator
+- Added in JOptionPane
+
+Change Log #3 :
+- Added in Special Attack Limit
+
+Change Log #4 : 
+- Removed Special Attack Limit
+
+*/
 
 public class SeaMonster extends Entity{
     
@@ -17,10 +37,10 @@ public class SeaMonster extends Entity{
     
     private static String [] nameList = {"Giant Shark", "Sea Serpent", "Moby Dick", "Kraken", "Balloon Seagull"};
     
-    String [] SAArray = {"Raise The Seas", "Origin Pulse", "Hydro Devastation", "Call the Wind", "Swallow the World"};
-    String [] SADArray = {"The seas begin to swell, and waves crash down on you...", "Water begins to rise from the seas and they explode...", "The sea begins to rise and form a huge sphere, and then it slowly descends upon you...",
+    String [] SMArray = {"Raise The Seas", "Origin Pulse", "Hydro Devastation", "Call the Wind", "Swallow the World"};
+    String [] SMDArray = {"The seas begin to swell, and waves crash down on you...", "Water begins to rise from the seas and they explode...", "The sea begins to rise and form a huge sphere, and then it slowly descends upon you...",
                          "The wind begins to pick up rapidly and then a hurricane of water forms near you...", "The sea begins to turn, faster and faster as you are caught in a whirlpool..."};
-    int [] SADMGArray = {30, 20, 40, 25, 50}; // BATTLE SEQUENCE
+    int [] SMDMGArray = {30, 20, 40, 25, 50}; // BATTLE SEQUENCE
     
     public SeaMonster(String newName, double newHealth, double newEnergy, double newEnergyRecovery, Element newElement, /*int newRank*/ 
                        int newDebuff, int newBuff, 
@@ -53,8 +73,8 @@ public class SeaMonster extends Entity{
     public void specialAttack() { //flavor text
             System.out.println("The monster has used its special attack...");
             int y = gen.nextInt(5);
-            JOptionPane.showMessageDialog(null, SAArray[y]);
-            System.out.println(SADArray[y]);
+            JOptionPane.showMessageDialog(null, SMArray[y]);
+            System.out.println(SMDArray[y]);
             
     }
     
