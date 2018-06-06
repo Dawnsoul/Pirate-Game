@@ -22,6 +22,13 @@ Change Log #2 :
 - Added in Random generator
 - Added in JOptionPane
 
+AUTHOR COMMENT :
+I actually have no clue how stuff like a shark or a serpent can cause hurricanes, but you know, imagination.
+* 
+* 
+* 
+* 
+
 Change Log #3 :
 - Added in Special Attack Limit
 
@@ -37,8 +44,8 @@ public class SeaMonster extends Entity{
     
     private static String [] nameList = {"Giant Shark", "Sea Serpent", "Moby Dick", "Kraken", "Balloon Seagull"};
     
-    String [] SMArray = {"Raise The Seas", "Origin Pulse", "Hydro Devastation", "Call the Wind", "Swallow the World"};
-    String [] SMDArray = {"The seas begin to swell, and waves crash down on you...", "Water begins to rise from the seas and they explode...", "The sea begins to rise and form a huge sphere, and then it slowly descends upon you...",
+    private String [] SMArray = {"Raise The Seas", "Origin Pulse", "Hydro Devastation", "Call the Wind", "Swallow the World"};
+    private String [] SMDArray = {"The seas begin to swell, and waves crash down on you...", "Water begins to rise from the seas and they explode...", "The sea begins to rise and form a huge sphere, and then it slowly descends upon you...",
                          "The wind begins to pick up rapidly and then a hurricane of water forms near you...", "The sea begins to turn, faster and faster as you are caught in a whirlpool..."};
     int [] SMDMGArray = {30, 20, 40, 25, 50}; // BATTLE SEQUENCE
     
