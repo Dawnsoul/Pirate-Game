@@ -31,7 +31,11 @@ I'll be temporary removing this crap until we get to review process, and if we h
 
 Change Log #5 :
 - Added Can Heal in RandomEntity
+
+Change Log #6 :
+- Removed Can Heal ---> Potions sub.
 */
+
 public class Entity {
     
     protected String name;
@@ -71,11 +75,10 @@ public class Entity {
         
     }
 
-    //constructor with all attributes
+    //constructor with all attributes FOR MONSTER AND LIKE
     public Entity(String newName, double newHealth, double newEnergyRecovery, 
-            /*Element newElement, int newRank int newDebuff, int newBuff, SpecialAttack newSpecialAttack*/ boolean newCanHeal
-            , double newDamage
-                   ) {
+            /*Element newElement, int newRank int newDebuff, int newBuff, SpecialAttack newSpecialAttack boolean newCanHeal*/
+            double newDamage) {
         name = newName;
         health = newHealth;
         energy = MAX_ENERGY;
@@ -85,17 +88,18 @@ public class Entity {
         //debuff = newDebuff;
         //buff = newBuff;
         //spAtk = newSpecialAttack;
-        canHeal = newCanHeal;
+        //canHeal = newCanHeal;
         damage = newDamage;
         
     }
     
-    public Entity(String newName, double newEnergyRecovery, boolean newCanHeal, double newDamage) {
+    //MAINLY FOR PIRATE
+    public Entity(String newName, double newEnergyRecovery /*boolean newCanHeal,*/, double newDamage) {
         name = newName;
         health = MAX_HEALTH;
         energy = MAX_ENERGY;
         energyRecovery = newEnergyRecovery;
-        canHeal = newCanHeal;
+        //canHeal = newCanHeal; POTIONS ARE GOING TO SUB FOR THIS
         damage = newDamage;
         
     }
@@ -112,11 +116,13 @@ public class Entity {
         x.setBuff(0);*/
         x.setDamage(gen.nextInt(15) + 1);
         
+        /*
         if(gen.nextInt(2) == 0) {
             x.setCanHeal(true);
         } else {
             x.setCanHeal(false);
         }
+        */
      
     }
     
@@ -231,7 +237,7 @@ public class Entity {
         System.out.println("Skill Name : " + spAtk.getName());
         System.out.println("Damage : " + spAtk.getDamage());
     }
-*/
+
     //setter for canHeal
     public void setCanHeal(boolean newCanHeal) {
         canHeal = newCanHeal;
@@ -241,6 +247,7 @@ public class Entity {
     public boolean getCanHeal() {
         return canHeal;
     }
+    */
     
     /*
     needs to be fixed later to adjust
