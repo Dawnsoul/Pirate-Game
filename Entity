@@ -1,52 +1,225 @@
 package EntityInfo;
 
-import AttackInfo.*;
-import ItemInfo.*;
+//import AttackInfo.*;
+import java.util.*;
+
 
 /**
  *
- * @author 3004294
+ * @author andy and jake
  */
+
 
 /*
 Change Log #1 :
-- Removed Experience
+- Changed Damage, Type INT --> DOUBLE
 
 Change Log #2 :
-- Added Armor objects
+- Removed SpecialAttack Object --> Class centric method.
 
 Change Log #3 :
-- Removed Special Atttack Object
-*/
+- Removed parameter for energy
+- Set energy equal to MAX_ENERGY = 10;
 
-public class Pirate extends Entity { 
+*/
+public class Entity {
     
-    protected String status = null;
-    protected Armor hat;
-    protected Armor shirt;
-    protected Armor pant;
-    protected Armor shoe;
+    protected String name;
+    protected double health; //health of the monster
+    protected final int MAX_HEALTH = 100; //self explanatory
+    protected double energy; //amount of energy required for a monster to use a attack
+    protected final int MAX_ENERGY = 10; //self explanatory
+    protected double energyRecovery; //amount of energy a monster recovers per turn
+    protected final int MAX_ENERGY_RECOVERY = 10; //self explanatory
+    protected Element element; //element of the monster --- NEED TO FIX
+    protected int rank; //numbers inside are required to level up
+    protected int debuff; //debuffs that the monster can inflict on the pirate/hero
+    protected int buff; //stat increases that the monster can use on itself
+    //protected SpecialAttack spAtk; //a monster signature type
+    protected boolean canHeal; //boolean statement to see if a monster can heal 
     
-    public Pirate(String newName, double newHealth, double newEnergy, double newEnergyRecovery, Element newElement, 
-                  int newDebuff, int newBuff, /*SpecialAttack newSpecialAttack,*/ boolean canHeal, double newDamage
-                , String newStatus, Armor newHat, Armor newShirt, Armor newPant, Armor newShoe) {
-            super(newName, newHealth, newEnergy, newEnergyRecovery, newElement, newDebuff, newBuff, /*newSpecialAttack,*/ canHeal, newDamage);
-            status = newStatus; // roles such as captain, medical, etc, doesnt really affect the game but sounds nice and quick to add
-            hat = newHat;
-            shirt = newShirt;
-            pant = newPant;
-            shoe = newShoe;
-            
+    /*
+    ill keep this as a variable bc i dont know how you want the damage to be, seeing how we have
+    a attack info. but if you want to make damage as a object, just remove it.
+    */
+    protected double damage; 
+    protected int time = 0;
+    
+    
+    //constructor without attributes
+    public Entity() {
+        name = null;
+        health = 0;
+        energy = 0;
+        element = Element.Normal;
+        /*rank = 0;*/
+        debuff = 0;
+        buff = 0;
+        //spAtk = null;
+        canHeal = false;
+        damage = 0;
+     
+        
+    }
+
+    //constructor with all attributes
+    public Entity(String newName, double newHealth, double newEnergyRecovery, 
+            Element newElement, /*int newRank*/ int newDebuff, int newBuff, /*SpecialAttack newSpecialAttack*/ boolean newCanHeal
+            , double newDamage
+                   ) {
+        name = newName;
+        health = newHealth;
+        energy = MAX_ENERGY;
+        energyRecovery = newEnergyRecovery;
+        element = newElement;
+        //rank = newRank;
+        debuff = newDebuff;
+        buff = newBuff;
+        //spAtk = newSpecialAttack;
+        canHeal = newCanHeal;
+        damage = newDamage;
+        
     }
     
-    public void rankIncrementStats() { //unsure if used.
-        health = health + (health * .2);
-        energy = energy + (energy * .02);
-        energyRecovery = energyRecovery + (energyRecovery * .01);
-        rank = rank + 1;
-        damage = damage  +(damage * .3);
-                
+    //random object generator
+    public static void createRandomEntity(Entity x) {
+        Random gen = new Random();
+        x.setName("Entity");
+        x.setHealth(gen.nextInt(100) + 50);
+        x.setEnergy(gen.nextInt(50) + 50);
+        x.setEnergyRecovery(gen.nextInt(5));
+        x.setElement(Element.Normal);
+        x.setDebuff(0);
+        x.setBuff(0);
+        x.setDamage(gen.nextInt(15) + 1);
+     
     }
     
+    public void setName(String newName) {
+        name = newName;
+        
+    }
     
-}    
+    public String getName() {
+        return name;
+        
+    }
+    
+    public void setDamage(int newDamage) {
+        damage = newDamage;
+        
+    }
+    
+    public double getDamage() {
+        return damage;
+    }
+
+    public void incrementEnergy() { //method that allows the energy to be recovered --> needs to be used each interval of loop
+        energy = energy + getEnergyRecovery();
+    }
+    
+    public void setEnergyRecovery(double newEnergyRecovery) {
+        energyRecovery = newEnergyRecovery;
+    }
+    
+    public double getEnergyRecovery() {
+        return energyRecovery;
+    }
+    
+    //setter for health
+    public void setHealth(int newHealth) {
+        health = newHealth;
+    }
+
+    //getter for health
+    public double getHealth() {
+        return health;
+    }
+
+    //setter for energy
+    public void setEnergy(int newEnergy) {
+        energy = newEnergy;
+    }
+
+    //getter for energy
+    public double getEnergy() {
+        return energy;
+    }
+
+    //setter for element
+    public void setElement(Element newElement) {
+        element = newElement;
+    }
+
+    //getter for element
+    public Element getElement() {
+        return element;
+    }
+
+    //setter for rank
+    public void setRank(int newRank) {
+        rank = newRank;
+    }
+
+    //getter for rank
+    public int getRank() {
+        return rank;
+    }
+
+    //setter for debuff
+    public void setDebuff(int newDebuff) {
+        debuff = newDebuff;
+    }
+
+    //getter for debuff
+    public int getDebuff() {
+        return debuff;
+    }
+
+    //setter for buff
+    public void setBuff(int newBuff) {
+        buff = newBuff;
+    }
+
+    //getter for buff
+    public int getBuff() {
+        return buff;
+    }
+
+  /*
+    //setter for specialAtk
+    public void setSpecialAtk(String x, double y) {
+        spAtk = new SpecialAttack(x, y);
+    
+    }
+    
+    public void createRandomSpecialAttack() {
+        String x = "Special Attack";
+        double y = 25;
+        spAtk = new SpecialAttack(x, y);
+        
+    }
+
+    //getter for specialAtk
+    public void getSpecialAtkInfo() {
+        System.out.println("=================");
+        System.out.println("Skill Name : " + spAtk.getName());
+        System.out.println("Damage : " + spAtk.getDamage());
+    }
+*/
+    //setter for canHeal
+    public void setCanHeal(boolean newCanHeal) {
+        canHeal = newCanHeal;
+    }
+
+    //getter for canHeal
+    public boolean getCanHeal() {
+        return canHeal;
+    }
+    
+    //overrides toString method of Object class to neatly output Monster object
+    public String toString() {
+        return "health = " + health + "; " + "energy = " + energy + "; " + "element = " + element + "; " + "rank = " + rank + "; " + "debuff = " + debuff + "; " + "buff = " + buff + "; " + "canHeal = " + canHeal;
+    }
+
+}
