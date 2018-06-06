@@ -10,7 +10,8 @@ Change Log #1 :
 I imported in the necessary packages for the ArrayLists to work, and I changed ArrayList<Monster> to Arraylist<Entity>. 
 We need to check if this SpecialLocation accounts for Land/Sea Monsters.
 
-
+Change Log #2 :
+Changed Item array list into multiple attributes of special location
 
 */
 
@@ -20,6 +21,9 @@ public class SpecialLocation {
     private int location;
     private ArrayList<Item> loot;
     private ArrayList<Entity> monsters;
+    protected boolean hasArmor;
+    protected int weaponMat;
+    protected int armorMat;
 
     //constructor without attributes
     public SpecialLocation() {
@@ -27,14 +31,19 @@ public class SpecialLocation {
         location = 0;
         loot = new ArrayList<Item>();
         monsters = new ArrayList<Entity>();
+        hasArmor = false;
+        weaponMat = 0;
+        armorMat = 0;
     }
 
     //constructor with all attributes
-    public SpecialLocation(String newName, int newLocation, ArrayList<Item> newLoot, ArrayList<Entity> newMonsters) {
+    public SpecialLocation(String newName, int newLocation, ArrayList<Entity> newMonsters, boolean newHasArmor, int newWeaponMat, int newArmorMat) {
         name = newName;
         location = newLocation;
-        loot = newLoot;
         monsters = newMonsters;
+        hasArmor = newHasArmor;
+        weaponMat = newWeaponMat;
+        armorMat = newArmorMat;
     }
 
     //setter for name
@@ -57,16 +66,6 @@ public class SpecialLocation {
         return location;
     }
 
-    //setter for loot
-    public void setLoot(ArrayList<Item> newLoot) {
-        loot = newLoot;
-    }
-
-    //getter for loot
-    public ArrayList<Item> getLoot() {
-        return loot;
-    }
-
     //setter for monsters
     public void setMonsters(ArrayList<Entity> newMonsters) {
         monsters = newMonsters;
@@ -75,6 +74,36 @@ public class SpecialLocation {
     //getter for monsters
     public ArrayList<Entity> getMonsters() {
         return monsters;
+    }
+    
+    //setter for hasArmor
+    public void setHasArmor(boolean newHasArmor) {
+        hasArmor = newHasArmor;
+    }
+
+    //getter for hasArmor
+    public boolean getHasArmor() {
+        return hasArmor;
+    }
+    
+    //setter for weaponMat
+    public void setWeaponMat(int newWeaponMat) {
+        weaponMat = newWeaponMat;
+    }
+
+    //getter for weaponMat
+    public int getWeaponMat() {
+        return weaponMat;
+    }
+
+    //setter for armorMat
+    public void setArmorMat(int newArmorMat) {
+        armorMat = newArmorMat;
+    }
+
+    //getter for armorMat
+    public int getArmorMat() {
+        return armorMat;
     }
 
     //overrides toString method of Object class to neatly output SpecialLocation object
