@@ -13,7 +13,7 @@ Changed Island names :))))
 
 Change Log #3 :
 Added chance to get armor for each location
-Deleted 
+Deleted item array list, and added material chances
 */
 
 /*
@@ -75,17 +75,18 @@ public class Map
             int tempNum1 = (int)(100 * Math.random());
             boolean armor = (tempNum1 < armorChance) ? true : false;
             
-            //Determines if the player will recieve a potion or not
-            
             //Determines if the player will recieve a weapon upgrade or not
+            int weaponMat = (int)(2 * Math.random())
             
             //determines if the player will recieve an armor upgrade or not
+            int armorMat = (int)(3 * Math.random() + 1)
+            
+            //determines if the player will recieve a ship upgrade or not
             
             //special location requires location and monster list
             locations.add(new SpecialLocation(
                     placeNames.get((placeNames.size() - 1) * (int)(Math.random())), 
                     totalDistance - (x * (totalDistance / difficulty)), 
-                    new ArrayList<Item>(), 
                     new ArrayList<Entity>(),
                     //Has a chance of giving the special location armor
                     armor));
