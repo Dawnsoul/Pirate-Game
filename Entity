@@ -21,6 +21,16 @@ Change Log #3 :
 - Removed parameter for energy
 - Set energy equal to MAX_ENERGY = 10;
 
+Change Log #4 :
+- TEMP Remove Buff
+- TEMP Remove Debuff
+- TEMP Remove Element
+
+Authors Note :
+I'll be temporary removing this crap until we get to review process, and if we have time, we'll add it back
+
+Change Log #5 :
+- Added Can Heal in RandomEntity
 */
 public class Entity {
     
@@ -52,10 +62,9 @@ public class Entity {
         health = 0;
         energy = 0;
         element = Element.Normal;
-        /*rank = 0;*/
+        rank = 0;
         debuff = 0;
         buff = 0;
-        //spAtk = null;
         canHeal = false;
         damage = 0;
      
@@ -64,18 +73,28 @@ public class Entity {
 
     //constructor with all attributes
     public Entity(String newName, double newHealth, double newEnergyRecovery, 
-            Element newElement, /*int newRank*/ int newDebuff, int newBuff, /*SpecialAttack newSpecialAttack*/ boolean newCanHeal
+            /*Element newElement, int newRank int newDebuff, int newBuff, SpecialAttack newSpecialAttack*/ boolean newCanHeal
             , double newDamage
                    ) {
         name = newName;
         health = newHealth;
         energy = MAX_ENERGY;
         energyRecovery = newEnergyRecovery;
-        element = newElement;
+        //element = newElement;
         //rank = newRank;
-        debuff = newDebuff;
-        buff = newBuff;
+        //debuff = newDebuff;
+        //buff = newBuff;
         //spAtk = newSpecialAttack;
+        canHeal = newCanHeal;
+        damage = newDamage;
+        
+    }
+    
+    public Entity(String newName, double newEnergyRecovery, boolean newCanHeal, double newDamage) {
+        name = newName;
+        health = MAX_HEALTH;
+        energy = MAX_ENERGY;
+        energyRecovery = newEnergyRecovery;
         canHeal = newCanHeal;
         damage = newDamage;
         
@@ -88,10 +107,16 @@ public class Entity {
         x.setHealth(gen.nextInt(100) + 50);
         x.setEnergy(gen.nextInt(50) + 50);
         x.setEnergyRecovery(gen.nextInt(5));
-        x.setElement(Element.Normal);
+        /*x.setElement(Element.Normal);
         x.setDebuff(0);
-        x.setBuff(0);
+        x.setBuff(0);*/
         x.setDamage(gen.nextInt(15) + 1);
+        
+        if(gen.nextInt(2) == 0) {
+            x.setCanHeal(true);
+        } else {
+            x.setCanHeal(false);
+        }
      
     }
     
@@ -127,7 +152,7 @@ public class Entity {
     }
     
     //setter for health
-    public void setHealth(int newHealth) {
+    public void setHealth(int newHealth) { 
         health = newHealth;
     }
 
@@ -145,7 +170,7 @@ public class Entity {
     public double getEnergy() {
         return energy;
     }
-
+/*
     //setter for element
     public void setElement(Element newElement) {
         element = newElement;
@@ -186,7 +211,7 @@ public class Entity {
         return buff;
     }
 
-  /*
+  
     //setter for specialAtk
     public void setSpecialAtk(String x, double y) {
         spAtk = new SpecialAttack(x, y);
@@ -217,9 +242,13 @@ public class Entity {
         return canHeal;
     }
     
+    /*
+    needs to be fixed later to adjust
+    */
+    
     //overrides toString method of Object class to neatly output Monster object
     public String toString() {
-        return "health = " + health + "; " + "energy = " + energy + "; " + "element = " + element + "; " + "rank = " + rank + "; " + "debuff = " + debuff + "; " + "buff = " + buff + "; " + "canHeal = " + canHeal;
+        return "health = " + health + "; " + "energy = " + energy + "; " + /*"element = " + element + "; " + "rank = " + rank + "; " + "debuff = " + debuff + "; " + "buff = " + buff + "; " +*/ "canHeal = " + canHeal;
     }
 
 }
