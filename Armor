@@ -14,8 +14,8 @@ public class Armor extends Item {
     }
 
     //constructor with all attributes
-    public Armor(ArrayList<String> randNames, int newDmgMit) {
-        super(randNames.get((int)(20*Math.random())), 1);
+    public Armor(String newName, int newDmgMit) {
+        super(newName, 1);
         dmgMit = newDmgMit;
     }
 
