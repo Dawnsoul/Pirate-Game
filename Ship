@@ -7,24 +7,59 @@ package EntityInfo;
 
 /*
 Change Log #1 :
-Created the setters and getters, however it needs to be noted that cannon damage is permanent, only cannonAmount should be increased
+- Created File
+
+Change Log #2 :
+- Remove CannonAmount
+- Add Speed (ship movement speed)
+- Add Cannon Ammo Recharge Rate
+- Remove CannonAmount setter/getter
+
+Change Log #3 :
+- Add repairMode : see comments
 */
 
 public class Ship {
     
-    protected double hullStatus; //health
+    protected double hullStatus; //health\
+
     protected int cannonAmount; //amount of cannons on ship, damage multipler
     protected int cannonAmmo; //amount of times a cannon can be shot
+    protected int cannonRecharge;
     protected int cannonDamage; //value needs to be low. because (dmg * amount) = ??
-    protected double speed; //how fast a cannon shoot
+    protected double speed; //how fast a ship can move
+    protected boolean repairMode;
     
     
-    public Ship(double newHullStatus, int newCannonAmount, int newCannonAmmo, int newCannonDamage, double newSpeed) {
+    public Ship(double newHullStatus, double newHullRepair, int newCannonAmmo, int newCannonRecharge, int newCannonDamage, double newSpeed) {
         hullStatus = newHullStatus;
-        cannonAmount = newCannonAmount;
         cannonAmmo = newCannonAmmo;
-        cannonDamage = (newCannonAmount * newCannonDamage);
+        cannonRecharge = newCannonRecharge;
+        cannonDamage = newCannonDamage;
         speed = newSpeed;
+        repairMode = false;
+        
+    }
+    
+    public void repairMode() { //call to activate or deactivate
+        if(hullStatus < 50 && hullStatus > 0) {
+            if(repairMode == false) { //repair mode is permanent
+                repairMode = true;
+                hullStatus = hullStatus + 30;
+                cannonDamage = cannonDamage - 3; // NUMBER NEEDS TO BE CHANGED JAKE, AHHH
+            
+            }
+        }
+        
+    }
+    
+    public double getCannonRecharge() {
+        return cannonRecharge;
+        
+    }
+    
+    public void setCannonRecharge(int newCannonRecharge) {
+        cannonRecharge = newCannonRecharge;
         
     }
     
@@ -33,10 +68,11 @@ public class Ship {
         
     }
     
+    /*
     public int getCannonAmount() {
         return cannonAmount;
         
-    }
+    }*/
     
     public int getCannonAmmo() {
         return cannonAmmo;
@@ -58,10 +94,10 @@ public class Ship {
         
     }
     
-    public void setCannonAmount(int newCannonAmount) {
+    /*public void setCannonAmount(int newCannonAmount) {
         cannonAmount = newCannonAmount;
         
-    }
+    }*/
     
     public void setCannonAmmo(int newCannonAmmo) {
         cannonAmmo = newCannonAmmo;
