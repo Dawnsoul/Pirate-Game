@@ -35,6 +35,8 @@ Change Log #3 :
 Change Log #4 : 
 - Removed Special Attack Limit
 
+Change Log #5 :
+- Removed Special Attack Object
 */
 
 public class SeaMonster extends Entity{
@@ -51,8 +53,8 @@ public class SeaMonster extends Entity{
     
     public SeaMonster(String newName, double newHealth, double newEnergy, double newEnergyRecovery, Element newElement, /*int newRank*/ 
                        int newDebuff, int newBuff, 
-                       SpecialAttack newSpecialAttack, boolean newCanHeal, int newDamage, double newSeaShield) {
-        super(newName, newHealth, newEnergy, newEnergyRecovery, newElement, /*newRank*/ newDebuff, newBuff, newSpecialAttack, newCanHeal, newDamage);
+                       /*SpecialAttack newSpecialAttack,*/ boolean newCanHeal, int newDamage, double newSeaShield) {
+        super(newName, newHealth, newEnergy, newEnergyRecovery, newElement, /*newRank*/ newDebuff, newBuff, /*newSpecialAttack,*/ newCanHeal, newDamage);
         //earth monster can be cancerous and call in a ally ONCE
         seaShield = newSeaShield;
         
