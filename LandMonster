@@ -22,8 +22,11 @@ Change Log #1 :
 AUTHOR COMMENT :
 I don't even have the slightest clue of how a Goblin or a Scorpion can cause a earthquake, but I'm gonna go with it.
 
-*/
+Change Log #2 :
+- TEMP Removed Special Attack Object
+- Modified class centric Special Attack method
 
+*/
 
 
 public class LandMonster extends Entity{
@@ -38,8 +41,8 @@ public class LandMonster extends Entity{
     
     public LandMonster(String newName, double newHealth, double newEnergy, double newEnergyRecovery, Element newElement, /*int newRank*/ 
                        int newDebuff, int newBuff, 
-                       SpecialAttack newSpecialAttack, boolean newCanHeal, int newDamage, boolean newReduceDamage) {
-        super(newName, newHealth, newEnergy, newEnergyRecovery, newElement, /*newRank*/ newDebuff, newBuff, newSpecialAttack, newCanHeal, newDamage);
+                       /*SpecialAttack newSpecialAttack,*/ boolean newCanHeal, int newDamage, boolean newReduceDamage) {
+        super(newName, newHealth, newEnergy, newEnergyRecovery, newElement, /*newRank*/ newDebuff, newBuff, /*newSpecialAttack,*/ newCanHeal, newDamage);
         //earth monster can be cancerous and call in a ally ONCE
         reduceDamage = newReduceDamage;
         
