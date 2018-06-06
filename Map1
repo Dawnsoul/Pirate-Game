@@ -10,6 +10,9 @@ Fixed the package importation error and changed the necessar Array List
 
 Change Log #2 : 
 Changed Island names :))))
+
+Change Log #3 :
+Added chance to get armor for each location
 */
 
 /*
@@ -85,12 +88,31 @@ public class Map
         int temp = 100;
         for(int x = 0; x < difficulty - 1; x++)
         {
+            //Make a random generator to make monsters.
+            //Make a random generator to make Items.
+            
+            //Determines if location will have armor or not
+            int tempNum1 = (int)(100 * Math.random());
+            boolean armor = (tempNum1 < armorChance) ? true : false;
+            
+            //Determines if the player will recieve a potion or not
+            
+            //Determines if the player will recieve a weapon upgrade or not
+            
+            //determines if the player will recieve an armor upgrade or not
+            
             //special location requires location and monster list
             locations.add(new SpecialLocation(
                     placeNames.get((placeNames.size() - 1) * (int)(Math.random())), 
                     totalDistance - (x * (totalDistance / difficulty)), 
                     new ArrayList<Item>(), 
-                    new ArrayList<Entity>()));
+                    new ArrayList<Entity>(),
+                    //Has a chance of giving the special location armor
+                    armor));
+            
+            //decreases chance to get armor each time a piece of armor is recieved
+            if(armor)
+            armorChance -= 25;
         }
     }
     
