@@ -13,6 +13,7 @@ Changed Island names :))))
 
 Change Log #3 :
 Added chance to get armor for each location
+Deleted 
 */
 
 /*
@@ -33,28 +34,7 @@ Added chance to get armor for each location
     
     //Names of land monsters
     
-    
-    //Adjectives Below
-    //Fire
-    
-    
-    //Water
-    
-    
-    //Earth
-    
-    
-    //Air
-    
-    
-    //Light
-    
-    
-    //Dark
-    
-    
     //takes in difficulty and generates map
-    
 public class Map
 {
     private int progress;
