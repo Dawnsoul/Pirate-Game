@@ -38,6 +38,9 @@ Change Log #6 :
 - Set ENERGY to MAX_ENERGY
 - Remove Javax.Swing.* Import
 
+Change Log #7 : 
+- Remove canHeal --> Potions
+
 */
 
 public class Pirate extends Entity { 
@@ -57,7 +60,7 @@ public class Pirate extends Entity {
     public Pirate(String newName, double newEnergyRecovery, /*Element newElement, 
                   int newDebuff, int newBuff, /*SpecialAttack newSpecialAttack,*/ boolean canHeal, double newDamage
                 , String newStatus, Armor newHat, Armor newShirt, Armor newPant, Armor newShoe) {
-            super(newName, newEnergyRecovery, /*newElement, newDebuff, newBuff, newSpecialAttack,*/ canHeal, newDamage);
+            super(newName, newEnergyRecovery, /*newElement, newDebuff, newBuff, newSpecialAttack, canHeal,*/ newDamage);
             health = MAX_HEALTH;
             energy = MAX_ENERGY;
             status = newStatus; // roles such as captain, medical, etc, doesnt really affect the game but sounds nice and quick to add
