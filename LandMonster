@@ -45,7 +45,7 @@ public class LandMonster extends Entity{
     public LandMonster(String newName, double newHealth, double newEnergyRecovery, Element newElement, /*int newRank*/ 
                        int newDebuff, int newBuff, 
                        /*SpecialAttack newSpecialAttack,*/ boolean newCanHeal, int newDamage, boolean newReduceDamage) {
-        super(newName, newHealth, newEnergyRecovery, /*newElement, newRank newDebuff, newBuff, newSpecialAttack,*/ newCanHeal, newDamage);
+        super(newName, newHealth, newEnergyRecovery, /*newElement, newRank newDebuff, newBuff, newSpecialAttack,*/newDamage);
         //earth monster can be cancerous and call in a ally ONCE
         reduceDamage = newReduceDamage;
         
