@@ -1,7 +1,6 @@
 package EntityInfo;
 
-import StatusInfo.Element;
-import AttackInfo.*;
+//import AttackInfo.*;
 import java.util.*;
 
 
@@ -13,7 +12,10 @@ import java.util.*;
 
 /*
 Change Log #1 :
-I changed damage to be of type Double. Also SpAtk ??
+- Changed Damage, Type INT --> DOUBLE
+
+Change Log #2 :
+- Removed SpecialAttack Object --> Class centric method.
 
 */
 public class Entity {
@@ -29,7 +31,7 @@ public class Entity {
     protected int rank; //numbers inside are required to level up
     protected int debuff; //debuffs that the monster can inflict on the pirate/hero
     protected int buff; //stat increases that the monster can use on itself
-    protected SpecialAttack spAtk; //a monster signature type
+    //protected SpecialAttack spAtk; //a monster signature type
     protected boolean canHeal; //boolean statement to see if a monster can heal 
     
     /*
@@ -49,7 +51,7 @@ public class Entity {
         /*rank = 0;*/
         debuff = 0;
         buff = 0;
-        spAtk = null;
+        //spAtk = null;
         canHeal = false;
         damage = 0;
      
@@ -58,7 +60,7 @@ public class Entity {
 
     //constructor with all attributes
     public Entity(String newName, double newHealth, double newEnergy, double newEnergyRecovery, 
-            Element newElement, /*int newRank*/ int newDebuff, int newBuff, SpecialAttack newSpecialAttack, boolean newCanHeal
+            Element newElement, /*int newRank*/ int newDebuff, int newBuff, /*SpecialAttack newSpecialAttack*/ boolean newCanHeal
             , double newDamage
                    ) {
         name = newName;
@@ -69,7 +71,7 @@ public class Entity {
         //rank = newRank;
         debuff = newDebuff;
         buff = newBuff;
-        spAtk = newSpecialAttack;
+        //spAtk = newSpecialAttack;
         canHeal = newCanHeal;
         damage = newDamage;
         
@@ -85,11 +87,9 @@ public class Entity {
         x.setElement(Element.Normal);
         x.setDebuff(0);
         x.setBuff(0);
-        x.setSpecialAttack("", 0); // WTF <--- NEEDS TO BE FIXED
         x.setDamage(gen.nextInt(15) + 1);
      
     }
-    
     
     public void setName(String newName) {
         name = newName;
@@ -182,6 +182,7 @@ public class Entity {
         return buff;
     }
 
+  /*
     //setter for specialAtk
     public void setSpecialAtk(String x, double y) {
         spAtk = new SpecialAttack(x, y);
@@ -201,7 +202,7 @@ public class Entity {
         System.out.println("Skill Name : " + spAtk.getName());
         System.out.println("Damage : " + spAtk.getDamage());
     }
-
+*/
     //setter for canHeal
     public void setCanHeal(boolean newCanHeal) {
         canHeal = newCanHeal;
@@ -214,7 +215,7 @@ public class Entity {
     
     //overrides toString method of Object class to neatly output Monster object
     public String toString() {
-        return "health = " + health + "; " + "energy = " + energy + "; " + "element = " + element + "; " + "rank = " + rank + "; " + "debuff = " + debuff + "; " + "buff = " + buff + "; " + "specialAtk = " + spAtk + "; " + "canHeal = " + canHeal;
+        return "health = " + health + "; " + "energy = " + energy + "; " + "element = " + element + "; " + "rank = " + rank + "; " + "debuff = " + debuff + "; " + "buff = " + buff + "; " + "canHeal = " + canHeal;
     }
 
 }
