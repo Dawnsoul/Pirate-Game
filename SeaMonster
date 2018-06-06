@@ -1,6 +1,5 @@
 package EntityInfo;
 
-import AttackInfo.*;
 import java.util.Random;
 import javax.swing.*;
 
@@ -37,6 +36,15 @@ Change Log #4 :
 
 Change Log #5 :
 - Removed Special Attack Object
+
+Change Log #6 :
+- Removed import for AttackInfo
+- Removed energy parameter
+
+Change Log #7 : 
+- TEMP Remove Element
+- TEMP Remove Buff
+- TEMP Remove Debuff
 */
 
 public class SeaMonster extends Entity{
@@ -51,10 +59,10 @@ public class SeaMonster extends Entity{
                          "The wind begins to pick up rapidly and then a hurricane of water forms near you...", "The sea begins to turn, faster and faster as you are caught in a whirlpool..."};
     int [] SMDMGArray = {30, 20, 40, 25, 50}; // BATTLE SEQUENCE
     
-    public SeaMonster(String newName, double newHealth, double newEnergy, double newEnergyRecovery, Element newElement, /*int newRank*/ 
+    public SeaMonster(String newName, double newHealth, double newEnergyRecovery, Element newElement, /*int newRank*/ 
                        int newDebuff, int newBuff, 
                        /*SpecialAttack newSpecialAttack,*/ boolean newCanHeal, int newDamage, double newSeaShield) {
-        super(newName, newHealth, newEnergy, newEnergyRecovery, newElement, /*newRank*/ newDebuff, newBuff, /*newSpecialAttack,*/ newCanHeal, newDamage);
+        super(newName, newHealth, newEnergyRecovery, /*newElement, newRank newDebuff, newBuff, newSpecialAttack,*/ newCanHeal, newDamage);
         //earth monster can be cancerous and call in a ally ONCE
         seaShield = newSeaShield;
         
@@ -72,9 +80,10 @@ public class SeaMonster extends Entity{
         x.setHealth(gen.nextInt(100) + 50);
         x.setEnergy(gen.nextInt(50) + 50);
         x.setEnergyRecovery(gen.nextInt(5));
+        /*
         x.setElement(Element.Normal);
         x.setDebuff(0);
-        x.setBuff(0);
+        x.setBuff(0); */
         x.setDamage(gen.nextInt(15) + 1);
      
     }
