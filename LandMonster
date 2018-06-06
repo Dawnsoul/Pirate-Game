@@ -1,6 +1,5 @@
 package EntityInfo;
 
-import AttackInfo.*;
 import java.util.Random;
 import javax.swing.JOptionPane;
 
@@ -26,6 +25,9 @@ Change Log #2 :
 - TEMP Removed Special Attack Object
 - Modified class centric Special Attack method
 
+Change Log #3 :
+- Removed energy parameter
+- Removed import for AttackInfo
 */
 
 
@@ -39,10 +41,10 @@ public class LandMonster extends Entity{
     private String [] LMDArray = {"The land begins to shake as a earth quake ravages throughout the land.", "A huge rock falls ontop of you and explodes...", "You just got hit by a boulder."};
     int [] LMDMGArray = {20, 30, 25};
     
-    public LandMonster(String newName, double newHealth, double newEnergy, double newEnergyRecovery, Element newElement, /*int newRank*/ 
+    public LandMonster(String newName, double newHealth, double newEnergyRecovery, Element newElement, /*int newRank*/ 
                        int newDebuff, int newBuff, 
                        /*SpecialAttack newSpecialAttack,*/ boolean newCanHeal, int newDamage, boolean newReduceDamage) {
-        super(newName, newHealth, newEnergy, newEnergyRecovery, newElement, /*newRank*/ newDebuff, newBuff, /*newSpecialAttack,*/ newCanHeal, newDamage);
+        super(newName, newHealth, newEnergyRecovery, newElement, /*newRank*/ newDebuff, newBuff, /*newSpecialAttack,*/ newCanHeal, newDamage);
         //earth monster can be cancerous and call in a ally ONCE
         reduceDamage = newReduceDamage;
         
