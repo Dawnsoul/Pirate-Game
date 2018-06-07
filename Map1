@@ -14,6 +14,8 @@ Changed Island names :))))
 Change Log #3 :
 Added chance to get armor for each location
 Deleted item array list, and added material chances
+Put randomized materials into generated special location
+changed temp to armorChance
 */
 
 /*
@@ -65,7 +67,7 @@ public class Map
     
     public void easyMap(int difficulty)
     {
-        int temp = 100;
+        int armorChance = 100;
         for(int x = 0; x < difficulty - 1; x++)
         {
             //Make a random generator to make monsters.
@@ -76,20 +78,33 @@ public class Map
             boolean armor = (tempNum1 < armorChance) ? true : false;
             
             //Determines if the player will recieve a weapon upgrade or not
-            int weaponMat = (int)(2 * Math.random())
+            int weaponMat = (int)(2 * Math.random());
             
             //determines if the player will recieve an armor upgrade or not
-            int armorMat = (int)(3 * Math.random() + 1)
+            int armorMat = (int)(3 * Math.random() + 1);
             
             //determines if the player will recieve a ship upgrade or not
+            int shipMat = (int)(5 * Math.random() + 1);
             
             //special location requires location and monster list
+            /*
+                Attributes listed in order
+                name
+                distance
+                monster
+                armor
+                weaponMaterials
+                armorMaterials
+                shipMaterials
+            */
             locations.add(new SpecialLocation(
                     placeNames.get((placeNames.size() - 1) * (int)(Math.random())), 
                     totalDistance - (x * (totalDistance / difficulty)), 
                     new ArrayList<Entity>(),
-                    //Has a chance of giving the special location armor
-                    armor));
+                    armor, 
+                    weaponMat,
+                    armorMat,
+                    shipMat));
             
             //decreases chance to get armor each time a piece of armor is recieved
             if(armor)
