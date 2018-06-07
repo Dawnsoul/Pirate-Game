@@ -17,6 +17,240 @@ Change Log #1 :
 
 Change Log #2 :
 - Added Armor objects
+package EntityInfo;
+
+
+import ItemInfo.*;
+import java.util.Random;
+import java.util.Scanner;
+import javax.swing.JOptionPane;
+
+/**
+ *
+ * @author 3004294
+ */
+
+/*
+Change Log #1 :
+- Removed Experience
+
+Change Log #2 :
+- Added Armor objects
+
+Change Log #3 :
+- Removed Special Atttack Object
+
+Change Log #4 : 
+- Added in class centric Special Attack method
+- Added in ArrayLists for names, descriptions, damage of special Attack
+        
+Change Log #5 : 
+- Added in Generator, JOption.
+- Added in Skill Cost
+- Added in Skill Damage
+- Modified SP Method to remove Cost
+
+Change Log #6 :
+- Removed Energy'
+- TEMP Remove Buff
+- TEMP Remove Debuff
+- TEMP Remove Element
+- Set HEALTH to MAX_HEALTH
+- Set ENERGY to MAX_ENERGY
+- Remove Javax.Swing.* Import
+
+Change Log #7 : 
+- Remove canHeal --> Potions
+
+Change Log #8 :
+- Removed armor objects ---> Different method
+
+Change Log #9 :
+- Add createPirate method
+
+Change Log #10: 
+added potion inv and adjusted armor into an integer value. Made setters and getters for potion inv
+*/
+
+public class Pirate extends Entity { 
+    
+    protected String status = null;
+    protected int armor;
+    /*protected Armor hat;
+    protected Armor shirt;
+    protected Armor pant;
+    protected Armor shoe;*/
+    protected String weapon;
+    
+    protected int potionInv;
+    protected int armorAmt;
+    
+    private String [] PArray = {"Critical Hit", "Cannon Barrage", "Send the Scurvy", "Deadshot Daiquiri"}; //names of the skills
+    int [] PCArray = {4, 7, 5, 10}; //costs of the skills
+    int [] PDMGArray = {20, 30, 10, 40};
+    
+    
+    
+    Random gen = new Random();
+    
+    public Pirate() {
+        name = null;
+        health = 0;
+        energyRecovery = 0;
+        damage = 0;
+        status = null;
+        armor = 0;
+        weapon = null;
+        potionInv = 0;
+        
+    }
+    
+    public Pirate(String newName, int newHealth, int newEnergy, int newEnergyRecovery, /*Element newElement, 
+                  int newDebuff, int newBuff, /*SpecialAttack newSpecialAttack,*/ int newDamage
+                , String newStatus, int newArmor, String newWeapon) {
+            super(newName, newHealth, newEnergy, newEnergyRecovery, /*newElement, newDebuff, newBuff, newSpecialAttack, canHeal,*/ newDamage);
+            health = newHealth;
+            energy = newEnergy;
+            status = newStatus; // roles such as captain, medical, etc, doesnt really affect the game but sounds nice and quick to add
+            armor = newArmor;
+            /*
+            hat = newHat;
+            shirt = newShirt;
+            pant = newPant;
+            shoe = newShoe;
+            */
+            weapon = newWeapon;
+            potionInv = 1;
+            
+            
+    }
+    
+    public void setWeapon(String newWeapon) {
+        weapon = newWeapon;
+        
+    }
+    
+    public String getWeapon() {
+        return weapon;
+        
+    }
+    
+    public void setStatus(String newStatus) {
+        status = newStatus;
+        
+    }
+    
+    public String getStatus() {
+        return status;
+        
+    }
+    
+    public int getArmor()
+    {
+        return armor;
+    }
+    
+    public void setArmor(int newArmor)
+    {
+        armor = newArmor;
+    }
+    
+    public int getPotionInv()
+    {
+        return potionInv;
+    }
+    
+    public void setPotionInv(int newPotionInv)
+    {
+        potionInv = newPotionInv;
+    }
+    
+    
+    //getter for armor amount
+    public void setArmorAmt(int newArmorAmt)
+    {
+        armorAmt = newArmorAmt;
+    }
+    
+    //setter for armor amount
+    public int getArmorAmt()
+    {
+        return armorAmt;
+    }
+    
+    public void createPirate(Pirate player) {
+        Scanner scan = new Scanner(System.in);
+        
+        System.out.println("Please enter in the name of the pirate >:");
+        
+        String x = scan.next();
+        player.setName(x);
+        
+        System.out.println("Please choose the Pirate Position :>"
+                +          "\n1 - Captain"
+                +          "\n2 - Vice Captain"
+                +          "\n3 - Buccaneer"
+                +          "\n4 - Swashbuckler");
+        
+        int y = scan.nextInt();
+        switch(y) {
+            case 1:
+                player.setWeapon("Cutlass");
+                player.setStatus("Captain");
+                break;
+            case 2:
+                player.setWeapon("Flintlock");
+                player.setStatus("Vice Captain");
+                break;
+            case 3: 
+                player.setWeapon("Saber");
+                player.setStatus("Buccaneer");
+                break;
+            case 4:
+                player.setWeapon("Dagger");
+                player.setStatus("Swashbuckler");
+                break;
+            default:
+                player.setWeapon("Gradebook");
+                player.setStatus("Begley");
+                
+        }
+        
+        player.setHealth(maxHealth); 
+        player.setEnergy(maxEnergy);
+        player.setEnergyRecovery(1);
+        player.setDamage(10);
+        
+        for (int i = 0; i < 100; i++) {
+                System.out.println("\n");                
+        }
+        
+        System.out.println("Creating Pirate...");
+        System.out.println("Equipping Pirate...");
+        System.out.println("Arming Pirate...");
+        
+        System.out.println("\n");
+        System.out.println("Welcome aboard " + " '" + player.getStatus() + "' " + " " + player.getName() + ", it is now time you create your ship.");
+        
+    }
+    
+    
+    public void specialAttack(Pirate x, Entity y) {
+        int c = gen.nextInt(4);
+        JOptionPane.showMessageDialog(null, "You have used ... " + PArray[c]);
+        
+        int e = x.getEnergy() - PCArray[c];
+        x.setEnergy(e);
+
+        int l = y.getHealth() - PDMGArray[c];
+        y.setHealth(l);
+        
+    }
+    
+    
+}    
+
+
 
 Change Log #3 :
 - Removed Special Atttack Object
