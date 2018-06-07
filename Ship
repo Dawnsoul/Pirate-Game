@@ -5,6 +5,9 @@ package EntityInfo;
  * @author 3004294
  */
 
+
+import java.util.Scanner;
+
 /*
 Change Log #1 :
 - Created File
@@ -17,27 +20,83 @@ Change Log #2 :
 
 Change Log #3 :
 - Add repairMode : see comments
+
+Change Log #4 :
+- Add name
+- Add setters/getters for name
+- Add createShip method
+
+Change Log #5 :
+- Add Hull Repair setter/getter
+- TEMP Remove cannon ammo
+- TEMP Remove cannon recharge
+- Add RepairMode setter/getter
 */
 
 public class Ship {
     
-    protected double hullStatus; //health\
+    protected int hullStatus; //health\
+    private int maxHullStatus = 100;
 
+    protected String name;
     protected int cannonAmount; //amount of cannons on ship, damage multipler
     protected int cannonAmmo; //amount of times a cannon can be shot
     protected int cannonRecharge;
     protected int cannonDamage; //value needs to be low. because (dmg * amount) = ??
-    protected double speed; //how fast a ship can move
+    protected int speed; //how fast a ship can move
     protected boolean repairMode;
+    protected int hullRepair;
     
     
-    public Ship(double newHullStatus, double newHullRepair, int newCannonAmmo, int newCannonRecharge, int newCannonDamage, double newSpeed) {
+    public Ship() {
+        name = null;
+        hullStatus = 0;
+        hullRepair = 0;
+        cannonDamage = 0;
+        speed = 0;
+        repairMode = false;
+        
+    }
+    
+    public Ship(String newName, int newHullStatus, int newHullRepair, int newCannonDamage, int newSpeed, boolean newRepairMode) {
+        name = newName;
         hullStatus = newHullStatus;
-        cannonAmmo = newCannonAmmo;
-        cannonRecharge = newCannonRecharge;
+        hullRepair = newHullRepair;
         cannonDamage = newCannonDamage;
         speed = newSpeed;
-        repairMode = false;
+        repairMode = newRepairMode;
+        
+    }
+    
+    public void createShip(Ship ship) {
+        Scanner scan = new Scanner(System.in);
+        
+        System.out.println("Please enter in the name of your ship >:");
+        String x = scan.next();
+        ship.setName(x);
+        
+        ship.setHullStatus(maxHullStatus);
+        ship.setHullRepair(5);
+        ship.setCannonDamage(10);
+        ship.setSpeed(2);
+        ship.setRepairMode(false);
+        
+        System.out.println("\n");
+        System.out.println("Creating ship...");
+        System.out.println("Repairing hull...");
+        System.out.println("Arming ship...");
+        
+        System.out.println("\n\n");
+        
+    }
+    
+    public void setRepairMode(boolean newRepairMode) {
+        repairMode = newRepairMode;
+        
+    }
+    
+    public boolean getRepairMode() {
+        return repairMode;
         
     }
     
@@ -53,7 +112,27 @@ public class Ship {
         
     }
     
-    public double getCannonRecharge() {
+    public double getHullRepair() {
+        return hullRepair;
+        
+    }
+    
+    public void setHullRepair(int newHullRepair) {
+        hullRepair = newHullRepair;
+        
+    }
+    
+    public String getName() { 
+        return name;
+        
+    }
+    
+    public void setName(String newName) {
+        name = newName;
+        
+    }
+    
+    public int getCannonRecharge() {
         return cannonRecharge;
         
     }
@@ -63,19 +142,8 @@ public class Ship {
         
     }
     
-    public double getHullStatus() {
+    public int getHullStatus() {
         return hullStatus;
-        
-    }
-    
-    /*
-    public int getCannonAmount() {
-        return cannonAmount;
-        
-    }*/
-    
-    public int getCannonAmmo() {
-        return cannonAmmo;
         
     }
     
@@ -84,29 +152,27 @@ public class Ship {
         
     }
     
-    public double getSpeed() {
+    public void setCannonDamage(int newCannonDamage) {
+        cannonDamage = newCannonDamage;
+        
+    }
+    
+    public int getSpeed() {
         return speed;
         
     }
     
-    public void setHullStatus(double newHullStatus) {
+    public void setHullStatus(int newHullStatus) {
         hullStatus = newHullStatus;
         
-    }
     
-    /*public void setCannonAmount(int newCannonAmount) {
-        cannonAmount = newCannonAmount;
-        
-    }*/
-    
-    public void setCannonAmmo(int newCannonAmmo) {
-        cannonAmmo = newCannonAmmo;
-        
     }
     
     public void setSpeed(int newSpeed) {
         speed = newSpeed;
         
     }
+
+  
     
 }
