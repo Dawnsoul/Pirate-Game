@@ -1,1 +1,528 @@
+package PirateGame;
 
+/*
+Driver *
+*/
+
+import EntityInfo.*;
+import ItemInfo.*;
+import MapInfo.*;
+import java.util.*;
+import javax.swing.JOptionPane;
+
+public class PirateGame {
+
+   static Scanner scan = new Scanner(System.in);
+   static boolean gameStatus = false;
+    
+    public static void main(String[] args) {
+            Pirate pirate = new Pirate();
+            Map1 map = new Map1();
+            Ship ship = new Ship();
+            
+            
+            System.out.println("Do you wish to start the Pirate Adventurey"
+                    + "? Y/N");
+            String input = scan.next();
+            
+            if(input.equals("Y") || input.equals("y")) {
+                gameStatus = true;
+                for(int i = 0; i < 100; i++) {
+                    System.out.println("\n");
+                }
+            } else if(input.equals("N") || input.equals("n")) {
+                gameStatus = false;
+                for(int i = 0; i < 100; i++) {
+                    System.out.println("\n");
+                }
+                System.out.println("The adventure has ended.");
+                
+            } else {
+                gameStatus = false;
+                for(int i = 0; i < 100; i++) {
+                    System.out.println("\n");
+                }
+                JOptionPane.showMessageDialog(null, "You have entered in a value that is neither Y/N.");
+            }
+            
+            while(gameStatus) {
+                pirate.createPirate(pirate);
+                ship.createShip(ship);
+                
+                System.out.println("Welcome aboard " + " '" + pirate.getStatus() + "' " + " " + pirate.getName() + " on the " + " '" + ship.getName() + "' ");
+                int difficulty = userInput(1, 3, "Please choose your difficulty level, and the game may begin: 1-3");
+                map.createMap(difficulty);
+                
+                for(int i = 0; i < 100; i++) {
+                    System.out.println("\n");
+                }
+                
+                System.out.println("The Game Has Started.");
+                map.sail();
+              
+            }
+            
+    }
+    
+    //gets an input from the user using scanner
+    public static int userInput(int range1, int range2, String question) {
+        Scanner scan = new Scanner (System.in);
+        boolean complete = false;
+        
+        System.out.println(question);
+        
+        int input = 0;
+        while(!complete) {
+            complete = true;
+            try{
+                input = scan.nextInt();
+            } catch(Exception e){
+                System.out.println("///////////////////////////////////////////////////////");
+                System.out.println("Please enter an appropriate integer " + range1 + "-" + range2);
+                System.out.println("////////////////////////////////////////////////////////"
+                        + "\n>");
+                scan.next();
+                complete = false;
+                continue;
+            
+            }
+            if(input < range1 || input > range2) {
+                complete = false;
+                System.out.println("///////////////////////////////////////////////////////");
+                System.out.println("Please enter an appropriate integer " + range1 + "-" + range2);
+                System.out.println("////////////////////////////////////////////////////////"
+                        + "\n>");
+            }
+        }
+        return input;
+    
+    }
+    
+    //gets an input from the user using the JOptionPane class
+    public static int userInput2(int range1, int range2, String question) {
+        Scanner scan = new Scanner (System.in);
+        boolean complete = false;
+        int input = 0;
+        
+        
+        //while loop repeats question until the user inputs a valid number.
+        while(!complete) {
+            complete = true;
+            
+            //asks the question, and recieves and checks answers all by using JOptionPane.
+            try{
+                input = Integer.parseInt(JOptionPane.showInputDialog(null, question));
+            } catch(Exception e){
+                JOptionPane.showMessageDialog(null, "///////////////////////////////////////////////////////"
+                + "\nPlease enter an appropriate integer " + range1 + "-" + range2
+                + "\n////////////////////////////////////////////////////////");
+                complete = false;
+                continue;
+            
+            }
+            if(input < range1 || input > range2) {
+                complete = false;
+                JOptionPane.showMessageDialog(null, "///////////////////////////////////////////////////////"
+                + "\nPlease enter an appropriate integer " + range1 + "-" + range2
+                + "\n////////////////////////////////////////////////////////");
+            }
+        }
+        return input;
+        
+    }
+    
+    public static Pirate landBattle(Pirate v, LandMonster b) {
+        //necessary variables for loops
+        boolean enemyDead = false;   
+        boolean monsterAction = false;
+        boolean playerDecision;
+        int actionDecision;
+        
+         while(!enemyDead) {
+            //determines if player is finished making decisions
+            playerDecision = false;
+            
+            //displays information about the monster
+            System.out.println("Name : " + b.getName());
+            System.out.println("---------------------------------------");
+            System.out.println("HP : " + b.getHealth() + " ENERGY : " + b.getEnergy() + " ATT : " + b.getDamage());
+            
+            System.out.println("\n\n");
+            
+            //displays information about the ship
+            System.out.println("Name : " + v.getName());
+            System.out.println("---------------------------------------");
+            System.out.println("Health: " + v.getHealth() + " ATT : " + v.getDamage());
+            
+            System.out.println("\n\n");
+        
+            //battle sequence
+            while(!playerDecision) {
+                //asks user variety of options    
+                actionDecision = (int) userInput2(0, 2, 
+                        "Strategy"
+                    +   "\nAttack >: 0" 
+                    +   "\nSpecial Attack >: 1"
+                      + "\nHeal >: 2");
+                
+                //choices for option one
+                if(actionDecision == 0) { 
+                    int u = b.getHealth() - v.getDamage();
+                    b.setHealth(u);
+                    
+                    int e = v.getEnergy() - 1;
+                    if(e < 0) {
+                        v.setEnergy(0);
+                    } else {
+                        v.setEnergy(e);
+                    }
+                    
+                    int o = v.getEnergy() + 3;
+                    if(o > 10) {
+                        v.setEnergy(10);
+                    } else {
+                        v.setEnergy(o);
+                    }
+
+                    
+                    //checks if monster health is less than 0
+                    if(b.getHealth() <= 0) {
+                        b.setHealth(0);
+                        JOptionPane.showMessageDialog(null, "You have successfully slain the " + b.getName());
+                        playerDecision = true;
+                        enemyDead = true;
+                        
+                    }
+                    
+                    //checks if monster health is greater than 0
+                    else if(b.getHealth() > 0) {
+                        JOptionPane.showMessageDialog(null, "You have attacked " + b.getName() + " for " + v.getDamage() + " damage");
+                        playerDecision = true;
+                        
+                        }
+ 
+                        
+                    }
+                
+                if(actionDecision == 1) {
+                        String input = JOptionPane.showInputDialog(null, "WARNING. WARNING. WARNING."
+                                                                       + "Special Attack will use alot of Energy."
+                                                                       + "Proceed? Y/N");
+                        
+                        if(input.equalsIgnoreCase("y")) {
+                            v.specialAttack(v, b);
+                            int u = v.getEnergy() + 3;
+                            if(u > 10) {
+                                v.setEnergy(10);
+                            } else {
+                                v.setEnergy(u);
+                            }
+                            
+                            if(b.getHealth() > 0) {
+                                JOptionPane.showMessageDialog(null, "You have attacked " + b.getName() + " with your special attack!"
+                                                             +      "\nIt currently has " + b.getHealth() );
+                                playerDecision = true;                           
+                            }
+                            
+                            if(b.getHealth() <= 0) {
+                                b.setHealth(0);
+                                JOptionPane.showMessageDialog(null, "You have slain the monster!");
+                                playerDecision = true;
+                                enemyDead = true;
+                            }
+                            
+                        } else if(input.equalsIgnoreCase("n")) {
+                            JOptionPane.showMessageDialog(null, "You have done nothing.");
+                            playerDecision = false;
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Please choose Y/N");
+                            playerDecision = false;
+                        }
+                        
+                    
+                    }
+            
+                if(actionDecision == 2) {
+                    /*
+                    
+                    JAKE DO THIS SHIT, I SWEAR TO GOD IF U FORGET
+                    
+                    
+                    */
+                }
+            }
+            
+            while(!monsterAction) {
+                if(b.getEnergy() > 0) {
+                    
+                    if(b.getEnergy() != 10) {
+                        int g = v.getHealth() - b.getDamage();
+                        if(g < 0) {
+                            v.setHealth(0);
+                        } else {
+                            v.setHealth(g);
+                        }
+                        
+                        
+                        if(v.getHealth() > 0) {
+                            int k = b.getEnergy() - 3;
+                                if(k < 0) {
+                                    b.setEnergy(0);
+                                } else {
+                                    b.setEnergy(k);
+                                }
+                        
+                                int h = v.getEnergy() + 1;
+                                    if(h == 10) {
+                                        v.setEnergy(10);
+                                } else {
+                                    v.setEnergy(h);
+                        }
+                         
+                         JOptionPane.showMessageDialog(null, "The monster has attacked you with " + b.getDamage() + " damage." +
+                                                             "\nYou currently have " + v.getHealth() + " health.");           
+                         monsterAction = true;
+                        }
+                        if(v.getHealth() <= 0) {
+                            JOptionPane.showMessageDialog(null, "The monster has just given you the god damn life ender.");
+                            monsterAction = true;
+                            gameStatus = false;
+                            
+                        }
+
+                    }
+                    
+                    if(b.getEnergy() <= 0) {
+                        JOptionPane.showMessageDialog(null, "The monster has no energy and will not attack.");
+                        int h = v.getEnergy() + 1;
+                        if(h == 10) {
+                            v.setEnergy(10);
+                        } else {
+                            v.setEnergy(h);
+                    }
+                }
+                    
+                    if(b.getEnergy() == 10) {
+                        b.specialAttack(v, b);
+                        
+                        if(v.getHealth() > 0) {
+                            int k = v.getEnergy() + 1;
+                            if(k > 10) {
+                               v.setEnergy(10);
+                               
+                            } else {
+                                v.setEnergy(k);
+                             }    
+                            monsterAction = true;
+                        } else if(v.getHealth() <= 0) {
+                            v.setHealth(0);
+                            monsterAction = true;
+                            gameStatus = false;
+                            JOptionPane.showMessageDialog(null, "ya don goofed");
+                        } else {
+                            JOptionPane.showMessageDialog(null, "??");
+                        }
+                        
+                    }
+            }
+            }
+        }
+         
+         return v;
+    }
+      
+    public static Ship seaBattle(Ship x, SeaMonster y) {
+        //necessary variables for loops
+        boolean enemyDead = false;   
+        boolean monsterAction = false;
+        boolean playerDecision;
+        int actionDecision;
+        
+        //outer loop to check if monster is dead
+        while(!enemyDead) {
+            //determines if player is finished making decisions
+            playerDecision = false;
+            
+            //displays information about the monster
+            System.out.println("Name : " + y.getName());
+            System.out.println("---------------------------------------");
+            System.out.println("HP : " + y.getHealth() + " ENERGY : " + y.getEnergy() + " ATT : " + y.getDamage());
+            
+            System.out.println("\n\n");
+            
+            //displays information about the ship
+            System.out.println("Name : " + x.getName());
+            System.out.println("---------------------------------------");
+            System.out.println("Hull Status : " + x.getHullStatus() + " ATT : " + x.getCannonDamage() + " Repair Mode : " + x.getRepairMode());
+            
+            //battle sequence
+            while(!playerDecision) {
+                //asks user variety of options    
+                actionDecision = (int) userInput2(0, 2, 
+                        "Strategy"
+                    +   "\nAttack >: 0" 
+                    +   "\nPanic Repair Mode >: 1"
+                    +   "\nSuicide Attack :> 2");
+                
+                //choices for option one
+                if(actionDecision == 0) { 
+                    int b = y.getHealth() - x.getCannonDamage();
+                    y.setHealth(b);
+                    
+                    //checks if monster health is less than 0
+                    if(y.getHealth() <= 0) {
+                        y.setHealth(0);
+                        playerDecision = true;
+                        JOptionPane.showMessageDialog(null, "The ship has successfully slain the " + y.getName());
+                        enemyDead = true;
+                    }
+                    
+                    //checks if monster health is greater than 0
+                    else if(y.getHealth() > 0) {
+                        JOptionPane.showMessageDialog(null, "The ship has attacked " + y.getName() + " for " + x.getCannonDamage() + " damage");
+                        
+                        if(x.getHullStatus() < 80) {
+                            int a = x.getHullStatus() + 5;
+                            x.setHullStatus(a);
+                            JOptionPane.showMessageDialog(null, "The ship has restored 5 Pts of its Hull, with the Hull currently at >: " + x.getHullStatus());
+                            
+                        }
+                        playerDecision = true;
+                        
+                    }
+                    
+                }
+                
+                //second option in chocies
+                if(actionDecision == 1) {
+                    String input = JOptionPane.showInputDialog(null, "WARNING. WARNING. WARNING."
+                                                +     "\nPANIC REPAIR MODE INSTANTLY RECOVERS 30 PTS TO THE HULL."
+                                                +     "\nYOU WILL LOSE CANNON DAMAGE PERMANENTLY."
+                                                +     "\nPROCEED? Y/N");
+                    
+                    //checks answer if equal to y
+                    if(input.equalsIgnoreCase("y")) {
+                        //changes hp of the ship
+                        int c = x.getHullStatus() + 30;
+                        x.setHullStatus(c);
+                        
+                        //changes the permanent cannon damage
+                        int d = x.getCannonDamage() - 1;
+                        x.setCannonDamage(d);
+                        playerDecision = true;
+                    //checks if answer == n
+                    } else if(input.equalsIgnoreCase("n")) {
+                        JOptionPane.showMessageDialog(null, "The ship does nothing...");
+                        playerDecision = false;
+                    } else {
+                        JOptionPane.showMessageDialog(null, "You have not chose Y/N.");
+                        playerDecision = false;
+                    }
+                }
+                
+                //second option in choices
+                if(actionDecision == 2) {
+                    String input2 = JOptionPane.showInputDialog(null, "WARNING. WARNING. WARNING." 
+                                                                +     "\nSuicide Attack will completely destroy the monster."
+                                                                +     "\nIt will set your Hull Pts to 1."
+                                                                +     "\nProceed? Y/N");
+                    
+                    if(input2.equalsIgnoreCase("y")) {
+                        x.setHullStatus(1);
+                        y.setHealth(0);
+                        playerDecision = true;
+                        
+                        JOptionPane.showMessageDialog(null, "The ship has slain the " + y.getName() + " with great cost.");
+                        playerDecision = true;
+                        enemyDead = true;
+                        
+                    } else if(input2.equalsIgnoreCase("n")) {
+                        JOptionPane.showMessageDialog(null, "The ship does nothing...");
+                        playerDecision = false;
+                    } else {
+                        JOptionPane.showMessageDialog(null, "You have not chose Y/N.");
+                        playerDecision = false;
+                    }
+                }
+                
+                //this is the action sequence of the monster
+                while(!monsterAction) {
+                    if(y.getEnergy() > 0) {
+                        
+                        //checks if it doesnt have enough for special attack
+                        if(y.getEnergy() != 10) {
+                            int q = x.getHullStatus() - y.getDamage();
+                            x.setHullStatus(q);
+                            //checks if ship is still alive
+                            if(x.getHullStatus() > 0) {
+                                JOptionPane.showMessageDialog(null, "The " + y.getName() + " has attacked the ship for " + y.getDamage()
+                                                        +       "\nThe ship now has " + x.getHullStatus() + " pts.");
+                                int f = y.getEnergy() - 2;
+                                if(y.getEnergy() < 0) {
+                                    y.setEnergy(0);
+                                } else {
+                                    y.setEnergy(f);
+                                }
+                                
+                                int e = y.getEnergy() + 1;
+                                y.setEnergy(e);
+                                monsterAction = true;
+                                
+                            }
+                            
+                            //checks if ship is ded
+                            if(x.getHullStatus() < 0 || x.getHullStatus() == 0) {
+                                JOptionPane.showMessageDialog(null, "The " + y.getName() + " has destroyed the ship.");
+                                monsterAction = true;
+                                gameStatus = false;
+                                
+                            }
+                            
+                        }
+                    
+                        //checks if monster has energy
+                    if(y.getEnergy() < 0 || y.getEnergy() == 0) {
+                        JOptionPane.showMessageDialog(null, "The monster does not attack because it is out of energy.");
+                        int z = y.getEnergy() + 1;
+                        y.setEnergy(z);
+                        monsterAction = true;
+                        
+                    }    
+                    
+                    //checks for special attack
+                    if(y.getEnergy() == 10) {
+                        y.specialAttack(x, y);
+                        
+                        if(x.getHullStatus() > 0) {
+                            monsterAction = true;
+                                
+                        }
+                        
+                        if(x.getHullStatus() <= 0) {
+                            x.setHullStatus(0);
+                            JOptionPane.showMessageDialog(null, "ya don goofed");
+                            monsterAction = true;
+                            gameStatus = false;
+                            
+                        } else {
+                            JOptionPane.showMessageDialog(null, "??");
+                        }
+                        
+                        
+                    } 
+                    
+                    
+                } 
+            }
+            
+            
+
+        }
+    
+            
+    }
+        
+        return x;
+    
+}
+}
