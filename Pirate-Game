@@ -292,7 +292,7 @@ public class PirateGame {
 
                     }
                     
-                    if(b.getEnergy() <= 0) {
+                    if(b.getEnergy() < 0) {
                         JOptionPane.showMessageDialog(null, "The monster has no energy and will not attack.");
                         int h = v.getEnergy() + 1;
                         if(h == 10) {
@@ -303,17 +303,18 @@ public class PirateGame {
                 }
                     
                     if(b.getEnergy() == 10) {
-                        b.specialAttack(v, b);
+                        v = b.specialAttack(v, b);
+                        b.setEnergy(0);
                         
                         if(v.getHealth() > 0) {
+                            monsterAction = true;
+                            
                             int k = v.getEnergy() + 1;
-                            if(k > 10) {
+                            if(v.getEnergy() == 10) {
                                v.setEnergy(10);
-                               
-                            } else {
+                                } else {
                                 v.setEnergy(k);
                              }    
-                            monsterAction = true;
                         } else if(v.getHealth() <= 0) {
                             v.setHealth(0);
                             monsterAction = true;
@@ -491,21 +492,23 @@ public class PirateGame {
                     
                     //checks for special attack
                     if(y.getEnergy() == 10) {
-                        y.specialAttack(x, y);
+                        x = y.specialAttack(x, y);
+                        y.setEnergy(0);
                         
-                        if(x.getHullStatus() > 0) {
+                        if(x.getHullStatus() < 0 || x.getHullStatus() == 0) {
+                            JOptionPane.showMessageDialog(null, "The " + y.getName() + " has destroyed the ship.");
                             monsterAction = true;
+                            gameStatus = false;
                                 
                         }
                         
-                        if(x.getHullStatus() <= 0) {
-                            x.setHullStatus(0);
-                            JOptionPane.showMessageDialog(null, "ya don goofed");
+                        if(x.getHullStatus() > 0) {
+                            JOptionPane.showMessageDialog(null, "The " + y.getName() + " has attacked the ship with its special attack."
+                                                            +   "The ship currently has + " + x.getHullStatus() + "pts.");
+                            int z = y.getEnergy() + 1;
+                            y.setEnergy(z);
                             monsterAction = true;
-                            gameStatus = false;
                             
-                        } else {
-                            JOptionPane.showMessageDialog(null, "??");
                         }
                         
                         
