@@ -48,6 +48,10 @@ Change Log #7 :
 
 Change Log #8 :
 - Added Energy Costs
+ 
+Change Log #9:
+changed random sea monster generator to make the monster have less health
+
 */
 
 public class SeaMonster extends Entity{
@@ -108,7 +112,7 @@ public class SeaMonster extends Entity{
 
         int y = gen.nextInt(5);
         x.setName(nameList[y]);
-        x.setHealth(gen.nextInt(50) + 50);
+        x.setHealth(gen.nextInt(10) + 30);
         x.setEnergy(15);
         x.setEnergyRecovery(gen.nextInt(5));
         x.setDamage(gen.nextInt(15) + 1);
