@@ -3,6 +3,7 @@ package MapInfo;
 import java.util.*;
 import ItemInfo.*;
 import EntityInfo.*;
+import PirateGame.*;
 
 /*
 Change Log #1 :
@@ -20,6 +21,12 @@ changed temp to armorChance
 Change Log #4: 
 Added random monster array list
 added if statement for sailing
+
+Change Log $5:
+Added armor
+did battle sequences when sailing
+added printlns and delays to make the game interface cleaner
+added potion chances each time a monster is killed
 */
 
 /*
@@ -56,27 +63,124 @@ public class Map1
         "Tryfaq Enclave"));
     
   
-    public void sail()
+    public Object[] sail(Pirate pirate, Ship ship)
     {
         progress += 2;//2 naut miles taken
+        System.out.println("*****************************************************");
+        System.out.println("You have sailed 2 nautical miles");
         boolean onLand = false;
+        
         
         for(SpecialLocation island : locations)
         {
+            //if Island was encountered, will execute land battle sequence
             if(island.getLocation() <= progress && island.getLocation() > (progress - 2))
             {
-                //must enact battle sequence for this island
+                System.out.println("You have reached " + island.getName());
+                delay(2000);
+                
+                //goes through every monster on the island
+                for(LandMonster mon : island.getMonsters())
+                {
+                    pirate = PirateGame.landBattle(pirate, mon);
+                    
+                    //percent chance that player will recieve a potion
+                    int potionChance = (int)(2 * Math.random());
+                    if(potionChance == 1)
+                    {
+                        pirate.setPotionInv(pirate.getPotionInv() + 1);
+                    }
+                    
+                    
+                    //checks if player is still alive
+                    if(!PirateGame.getGameStatus())
+                    {
+                        break;
+                    }
+                    
+                }
+                
+                //Collect all items on island
+                //Collect armor, if has any
+                if(island.getHasArmor())
+                {
+                    
+                    boolean fullArmor = false;
+                    //flavor text
+                    switch(pirate.getArmorAmt())
+                    {
+                        case 1:
+                            System.out.println("You recieved a Tri-Cornered Hat from the Island!");
+                            
+                        case 2:
+                            System.out.println("You recieved a Doublet from the Island!");
+                            
+                        case 3:
+                            System.out.println("You recieved Breeches from the Island!");
+                            
+                        case 4:
+                            System.out.println("You recieved Boots from the Island!");
+                            
+                        default:
+                            if(pirate.getArmorAmt() > 0)
+                            {
+                                fullArmor = true;
+                                System.out.println("You already have a full set!");
+                            }
+                            else
+                                System.out.println("nani? armor recieving bug here");
+                    }
+                    
+                    //each armor gives 8% mitigation, unless if full on armor
+                    System.out.println("It supplies 8% dmg mitigation.");
+                    if(!fullArmor)
+                        pirate.setArmor(pirate.getArmor() + 8);
+                    
+                    //keeps track of how many armor pieces you have
+                    if(!fullArmor)
+                        pirate.setArmorAmt(pirate.getArmorAmt() + 1);
+                }
+                
+                //Collects weapon Upgrade, if have any
+                
+                //checks if player died
+                if(!PirateGame.getGameStatus())
+                {
+                    break;
+                }
                 onLand = true;
             }
+            
+            
         }
+        
         if(!onLand)
         {
-            int sMChance = (int)(2 * Math.random());
-            if(sMChance == 1)
+            
+            int sMChance = (int)(3 * Math.random());
+            if(sMChance == 0)
             {
-                //enact sea monster battle sequence
+                //does battle sequence for sea battle
+                System.out.println("You have encountered a sea monster!");
+                ship = PirateGame.seaBattle(ship, SeaMonster.createSM());
+                delay(2000);
+                
+                //percent chance that player will recieve a potion
+                int potionChance = (int)(2 * Math.random());
+                if(potionChance == 1)
+                {
+                    System.out.println("You recieved a potion!");
+                    pirate.setPotionInv(pirate.getPotionInv() + 1);
+                }
+                
+            } else {
+                System.out.println("The waters were calm");
+                delay(2000);
             }
         }
+        
+        Object[] player = {pirate, ship};
+        return player;
         
     }
     
@@ -87,7 +191,7 @@ public class Map1
         for(int x = 0; x < difficulty - 1; x++)
         {
             //Make a random generator to make monsters.
-            ArrayList<Entity> monsters = new ArrayList<Entity>();
+            ArrayList<LandMonster> monsters = new ArrayList<LandMonster>();
             for(int a = 0; a < 3; a++)
                 monsters.add(LandMonster.createLM());
             
@@ -115,6 +219,7 @@ public class Map1
                 armorMaterials
                 shipMaterials
             */
+            
             locations.add(new SpecialLocation(
                     placeNames.get((placeNames.size() - 1) * (int)(Math.random())), 
                     totalDistance - (x * (totalDistance / difficulty)), 
@@ -129,5 +234,16 @@ public class Map1
             armorChance -= 25;
         }
     }
+    
+    //delays time when given a quantity(will be in miliseconds).
+    public static void delay(long time) {
+        try {
+            Thread.sleep(time);
+        } catch(InterruptedException ex) {
+            Thread.currentThread().interrupt();
+        }
+    }
+    
+    
     
 }
