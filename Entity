@@ -39,11 +39,11 @@ Change Log #6 :
 public class Entity {
     
     protected String name;
-    protected double health; //health of the monster
-    protected final int MAX_HEALTH = 100; //self explanatory
-    protected double energy; //amount of energy required for a monster to use a attack
-    protected final int MAX_ENERGY = 10; //self explanatory
-    protected double energyRecovery; //amount of energy a monster recovers per turn
+    protected int health; //health of the monster
+    protected int energy; //amount of energy required for a monster to use a attack
+    static protected int MAX_HEALTH = 100;
+    static protected final int MAX_ENERGY = 10; //self explanatory
+    protected int energyRecovery; //amount of energy a monster recovers per turn
     protected final int MAX_ENERGY_RECOVERY = 10; //self explanatory
     protected Element element; //element of the monster --- NEED TO FIX
     protected int rank; //numbers inside are required to level up
@@ -76,7 +76,7 @@ public class Entity {
     }
 
     //constructor with all attributes FOR MONSTER AND LIKE
-    public Entity(String newName, double newHealth, double newEnergyRecovery, 
+    public Entity(String newName, int newHealth, int newEnergy, int newEnergyRecovery, 
             /*Element newElement, int newRank int newDebuff, int newBuff, SpecialAttack newSpecialAttack boolean newCanHeal*/
             double newDamage) {
         name = newName;
@@ -92,39 +92,43 @@ public class Entity {
         damage = newDamage;
         
     }
-    
-    //MAINLY FOR PIRATE
-    public Entity(String newName, double newEnergyRecovery /*boolean newCanHeal,*/, double newDamage) {
-        name = newName;
-        health = MAX_HEALTH;
-        energy = MAX_ENERGY;
-        energyRecovery = newEnergyRecovery;
-        //canHeal = newCanHeal; POTIONS ARE GOING TO SUB FOR THIS
-        damage = newDamage;
-        
-    }
-    
+   
+    /*
     //random object generator
     public static void createRandomEntity(Entity x) {
         Random gen = new Random();
         x.setName("Entity");
-        x.setHealth(gen.nextInt(100) + 50);
-        x.setEnergy(gen.nextInt(50) + 50);
+        x.setHealth(gen.nextInt(60) + 50);
+        x.setEnergy(10);
         x.setEnergyRecovery(gen.nextInt(5));
-        /*x.setElement(Element.Normal);
+        x.setElement(Element.Normal);
         x.setDebuff(0);
-        x.setBuff(0);*/
+        x.setBuff(0);
         x.setDamage(gen.nextInt(15) + 1);
         
-        /*
+        
         if(gen.nextInt(2) == 0) {
             x.setCanHeal(true);
         } else {
             x.setCanHeal(false);
         }
-        */
-     
+        
+    
+    }*/
+    
+    public static Entity createEntity() { 
+        Entity x = new Entity();
+        Random gen = new Random();
+        
+        x.setName("Entity");
+        x.setHealth(gen.nextInt(60) + 50);
+        x.setEnergy(10);
+        x.setEnergyRecovery(gen.nextInt(3));
+        x.setDamage(gen.nextInt(15) + 1);
+        return x;
+        
     }
+    
     
     public void setName(String newName) {
         name = newName;
@@ -149,11 +153,11 @@ public class Entity {
         energy = energy + getEnergyRecovery();
     }
     
-    public void setEnergyRecovery(double newEnergyRecovery) {
+    public void setEnergyRecovery(int newEnergyRecovery) {
         energyRecovery = newEnergyRecovery;
     }
     
-    public double getEnergyRecovery() {
+    public int getEnergyRecovery() {
         return energyRecovery;
     }
     
