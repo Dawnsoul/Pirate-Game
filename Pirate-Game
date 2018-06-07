@@ -25,7 +25,7 @@ public class PirateGame {
             Ship ship = new Ship();
             
             
-            System.out.println("Do you wish to start the Pirate Adventurey"
+            System.out.println("Do you wish to start the Pirate Adventure."
                     + "? Y/N");
             String input = scan.next();
             
@@ -112,7 +112,7 @@ public class PirateGame {
     
     //gets an input from the user using the JOptionPane class
     public static int userInput2(int range1, int range2, String question) {
-        Scanner scan = new Scanner (System.in);
+        //Scanner scan = new Scanner (System.in);
         boolean complete = false;
         int input = 0;
         
@@ -138,10 +138,14 @@ public class PirateGame {
                 + "\nPlease enter an appropriate integer " + range1 + "-" + range2
                 + "\n////////////////////////////////////////////////////////");
             }
+            if(input == (range2 + 1)) {
+                break;
+            }
         }
         return input;
         
     }
+  
     
     public static Pirate landBattle(Pirate v, LandMonster b) {
         //necessary variables for loops
@@ -170,6 +174,22 @@ public class PirateGame {
         
             //battle sequence
             while(!playerDecision) {
+                
+                
+            //displays information about the monster
+            System.out.println("Name : " + b.getName());
+            System.out.println("---------------------------------------");
+            System.out.println("HP : " + b.getHealth() + " ENERGY : " + b.getEnergy() + " ATT : " + b.getDamage());
+            
+            System.out.println("\n\n");
+            
+            //displays information about the ship
+            System.out.println("Name : " + v.getName());
+            System.out.println("---------------------------------------");
+            System.out.println("Health: " + v.getHealth() + " ATT : " + v.getDamage());
+            
+            System.out.println("\n\n");
+            
                 //asks user variety of options    
                 actionDecision = (int) userInput2(0, 2, 
                         "Strategy"
@@ -209,7 +229,9 @@ public class PirateGame {
                     //checks if monster health is greater than 0
                     else if(b.getHealth() > 0) {
                         JOptionPane.showMessageDialog(null, "You have attacked " + b.getName() + " for " + u + " damage");
+                        monsterAction = false;
                         playerDecision = true;
+                        
                         
                         }
  
@@ -233,6 +255,7 @@ public class PirateGame {
                             if(b.getHealth() > 0) {
                                 JOptionPane.showMessageDialog(null, "You have attacked " + b.getName() + " with your special attack!"
                                                              +      "\nIt currently has " + b.getHealth() );
+                                monsterAction = false;
                                 playerDecision = true;                           
                             }
                             
@@ -262,6 +285,7 @@ public class PirateGame {
                         System.out.println("You used a Potion!");
                         v.setPotionInv(v.getPotionInv() - 1);
                         v.setHealth(v.getHealth() + 50);
+                        monsterAction = false;
                         playerDecision = true;
                         System.out.println("You now have " + v.getPotionInv()
                                 + " potions left.");
@@ -303,6 +327,7 @@ public class PirateGame {
                          JOptionPane.showMessageDialog(null, "The monster has attacked you with " + b.getDamage() + " damage." +
                                                              "\nYou currently have " + v.getHealth() + " health.");           
                          monsterAction = true;
+                         playerDecision = false;
                         }
                         if(v.getHealth() <= 0) {
                             JOptionPane.showMessageDialog(null, "The monster has just given you the god damn life ender.");
@@ -328,6 +353,7 @@ public class PirateGame {
                         b.setEnergy(0);
                         
                         if(v.getHealth() > 0) {
+                            playerDecision = false;
                             monsterAction = true;
                             
                             int k = v.getEnergy() + 1;
@@ -362,8 +388,14 @@ public class PirateGame {
         
         //outer loop to check if monster is dead
         while(!enemyDead) {
-            //determines if player is finished making decisions
+        
+        //determines if player is finished making decisions
             playerDecision = false;
+            while(!playerDecision) {
+            
+            for(int i = 0; i < 50; i ++) {
+                System.out.println("\n");
+            }
             
             //displays information about the monster
             System.out.println("Name : " + y.getName());
@@ -378,7 +410,6 @@ public class PirateGame {
             System.out.println("Hull Status : " + x.getHullStatus() + " ATT : " + x.getCannonDamage() + " Repair Mode : " + x.getRepairMode());
             
             //battle sequence
-            while(!playerDecision) {
                 //asks user variety of options    
                 actionDecision = (int) userInput2(0, 2, 
                         "Strategy"
@@ -394,14 +425,14 @@ public class PirateGame {
                     //checks if monster health is less than 0
                     if(y.getHealth() <= 0) {
                         y.setHealth(0);
-                        playerDecision = true;
                         JOptionPane.showMessageDialog(null, "The ship has successfully slain the " + y.getName());
+                        playerDecision = true;
                         enemyDead = true;
                     }
                     
                     //checks if monster health is greater than 0
                     else if(y.getHealth() > 0) {
-                        JOptionPane.showMessageDialog(null, "The ship has attacked " + y.getName() + " for " + b + " damage");
+                        JOptionPane.showMessageDialog(null, "The ship has attacked " + y.getName() + " for " + b + " damage.");
                         
                         if(x.getHullStatus() < 80) {
                             int a = x.getHullStatus() + 5;
@@ -410,6 +441,7 @@ public class PirateGame {
                             
                         }
                         playerDecision = true;
+                        monsterAction = false;
                         
                     }
                     
@@ -432,6 +464,7 @@ public class PirateGame {
                         int d = x.getCannonDamage() - 1;
                         x.setCannonDamage(d);
                         playerDecision = true;
+                        monsterAction = false;
                     //checks if answer == n
                     } else if(input.equalsIgnoreCase("n")) {
                         JOptionPane.showMessageDialog(null, "The ship does nothing...");
@@ -478,7 +511,7 @@ public class PirateGame {
                             //checks if ship is still alive
                             if(x.getHullStatus() > 0) {
                                 JOptionPane.showMessageDialog(null, "The " + y.getName() + " has attacked the ship for " + y.getDamage()
-                                                        +       "\nThe ship now has " + x.getHullStatus() + " pts.");
+                                                        +           "\nThe ship now has " + x.getHullStatus() + " pts.");
                                 int f = y.getEnergy() - 2;
                                 if(y.getEnergy() < 0) {
                                     y.setEnergy(0);
@@ -488,6 +521,7 @@ public class PirateGame {
                                 
                                 int e = y.getEnergy() + 1;
                                 y.setEnergy(e);
+                                playerDecision = false;
                                 monsterAction = true;
                                 
                             }
@@ -528,6 +562,7 @@ public class PirateGame {
                                                             +   "The ship currently has + " + x.getHullStatus() + "pts.");
                             int z = y.getEnergy() + 1;
                             y.setEnergy(z);
+                            playerDecision = false;
                             monsterAction = true;
                             
                         }
