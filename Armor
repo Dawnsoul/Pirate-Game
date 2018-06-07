@@ -1,9 +1,9 @@
-//jake Truongcao
-package pirategame;
+package ItemInfo;
 
 import java.util.*;
 
 public class Armor extends Item {
+    
     private String name;
     private int dmgMit;
     
@@ -14,8 +14,8 @@ public class Armor extends Item {
     }
 
     //constructor with all attributes
-    public Armor(String newName, int newDmgMit) {
-        super(newName, 1);
+    public Armor(ArrayList<String> randNames, int newDmgMit) {
+        super(randNames.get((int)(20*Math.random())), 1);
         dmgMit = newDmgMit;
     }
 
