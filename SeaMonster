@@ -116,14 +116,14 @@ public class SeaMonster extends Entity{
 
     }
     
-    public void specialAttack(Ship x, SeaMonster y) { //flavor text
+    public Ship specialAttack(Ship x, SeaMonster y) { //flavor text
             int c = gen.nextInt(5);
             JOptionPane.showMessageDialog(null, "The monster has used ... " + SMArray[c]);
-            y.setEnergy(0);
             JOptionPane.showMessageDialog(null, SMDArray[c]);
             
             int h = x.getHullStatus() - SMDMGArray[c];
             x.setHullStatus(h);
+            return x;
     }
     
     
