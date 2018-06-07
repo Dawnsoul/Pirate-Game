@@ -22,7 +22,7 @@ added all item materials.
 public class SpecialLocation {
     private String name;
     private int location;
-    private ArrayList<Entity> monsters;
+    private ArrayList<LandMonster> monsters;
     private boolean hasArmor;
     private int weaponMat;
     private int armorMat;
@@ -40,7 +40,7 @@ public class SpecialLocation {
     }
 
     //constructor with all attributes
-    public SpecialLocation(String newName, int newLocation, ArrayList<Entity> newMonsters, boolean newHasArmor, int newWeaponMat, 
+    public SpecialLocation(String newName, int newLocation, ArrayList<LandMonster> newMonsters, boolean newHasArmor, int newWeaponMat, 
     int newArmorMat, int newShipMat) {
         name = newName;
         location = newLocation;
@@ -72,12 +72,12 @@ public class SpecialLocation {
     }
 
     //setter for monsters
-    public void setMonsters(ArrayList<Entity> newMonsters) {
+    public void setMonsters(ArrayList<LandMonster> newMonsters) {
         monsters = newMonsters;
     }
 
     //getter for monsters
-    public ArrayList<Entity> getMonsters() {
+    public ArrayList<LandMonster> getMonsters() {
         return monsters;
     }
 
