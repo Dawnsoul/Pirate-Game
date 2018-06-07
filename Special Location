@@ -40,7 +40,8 @@ public class SpecialLocation {
     }
 
     //constructor with all attributes
-    public SpecialLocation(String newName, int newLocation, ArrayList<Entity> newMonsters, boolean newHasArmor, int newWeaponMat, int newArmorMat, int newShipMat) {
+    public SpecialLocation(String newName, int newLocation, ArrayList<Entity> newMonsters, boolean newHasArmor, int newWeaponMat, 
+    int newArmorMat, int newShipMat) {
         name = newName;
         location = newLocation;
         monsters = newMonsters;
@@ -122,7 +123,8 @@ public class SpecialLocation {
 
     //overrides toString method of Object class to neatly output SpecialLocation object
     public String toString() {
-        return "name = " + name + "; " + "location = " + location + "; " + "monsters = " + monsters + "; " + "hasArmor = " + hasArmor + "; " + "weaponMat = " + weaponMat + "; " + "armorMat = " + armorMat + "; " + "shipMat = " + shipMat;
+        return "name = " + name + "; " + "location = " + location + "; " + "monsters = " + monsters + "; " + "hasArmor = " + 
+        hasArmor + "; " + "weaponMat = " + weaponMat + "; " + "armorMat = " + armorMat + "; " + "shipMat = " + shipMat;
     }
 
 }
