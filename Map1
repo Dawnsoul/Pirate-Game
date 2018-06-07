@@ -40,11 +40,11 @@ Added random monster array list
     //Names of land monsters
     
     //takes in difficulty and generates map
-public class Map
+public class Map1
 {
     private int progress;
     public final int totalDistance = 100;
-    private ArrayList<SpecialLocation> locations;
+    private ArrayList<SpecialLocation> locations = new ArrayList<SpecialLocation>();
     private ArrayList<String> placeNames = new ArrayList<String>(Arrays.asList
         ("Conomi Islands", "The Mighty Isles", "The Infernal Islands", 
         "West Blue", "Vrahz Ait", "Irf Atoll", "Swallow Island", 
@@ -55,20 +55,22 @@ public class Map
         "Tryfaq Enclave"));
     
     //takes in difficulty and generates map
-    public Map(int difficulty)
+    public Map1()
     {
         progress = 0;
         
         
     }
     
+    
+    
     public void sail()
     {
-        progress += 5 + (int)(Math.random() * 11);//5-15 naut miles taken
+        progress += 2;//2 naut miles taken
         
     }
     
-    public void easyMap(int difficulty)
+    public void createMap(int difficulty)
     {
         difficulty *= 5;
         int armorChance = 100;
