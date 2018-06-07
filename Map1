@@ -16,6 +16,9 @@ Added chance to get armor for each location
 Deleted item array list, and added material chances
 Put randomized materials into generated special location
 changed temp to armorChance
+
+Change Log #4: 
+Added random monster array list
 */
 
 /*
@@ -67,11 +70,14 @@ public class Map
     
     public void easyMap(int difficulty)
     {
+        difficulty *= 5;
         int armorChance = 100;
         for(int x = 0; x < difficulty - 1; x++)
         {
             //Make a random generator to make monsters.
-            //Make a random generator to make Items.
+            ArrayList<Entity> monsters = new ArrayList<Entity>();
+            for(int a = 0; a < 3; a++)
+                monsters.add(LandMonster.createLM());
             
             //Determines if location will have armor or not
             int tempNum1 = (int)(100 * Math.random());
@@ -100,7 +106,7 @@ public class Map
             locations.add(new SpecialLocation(
                     placeNames.get((placeNames.size() - 1) * (int)(Math.random())), 
                     totalDistance - (x * (totalDistance / difficulty)), 
-                    new ArrayList<Entity>(),
+                    monsters,
                     armor, 
                     weaponMat,
                     armorMat,
