@@ -2,6 +2,10 @@ package PirateGame;
 
 /*
 Driver *
+
+Change Log #1:
+Made the player's attack vary +-5
+
 */
 
 import EntityInfo.*;
@@ -49,8 +53,11 @@ public class PirateGame {
                 pirate.createPirate(pirate);
                 ship.createShip(ship);
                 
-                System.out.println("Welcome aboard " + " '" + pirate.getStatus() + "' " + " " + pirate.getName() + " on the " + " '" + ship.getName() + "' ");
-                int difficulty = userInput(1, 3, "Please choose your difficulty level, and the game may begin: 1-3");
+                System.out.println("Welcome aboard " + " '" + pirate.getStatus()
+                        + "' " + " " + pirate.getName() + " on the " + " '" +
+                        ship.getName() + "' ");
+                int difficulty = userInput(1, 3, "Please choose your difficulty"
+                        + " level, and the game may begin: 1-3");
                 map.createMap(difficulty);
                 
                 for(int i = 0; i < 100; i++) {
@@ -58,10 +65,15 @@ public class PirateGame {
                 }
                 
                 System.out.println("The Game Has Started.");
-                map.sail();
-              
+                
+                while(gameStatus)
+                {
+                    Object[] player = map.sail(pirate, ship);
+                    pirate = (Pirate)player[0];
+                    ship = (Ship)player[1];
+                    
+                }
             }
-            
     }
     
     //gets an input from the user using scanner
@@ -167,8 +179,8 @@ public class PirateGame {
                 
                 //choices for option one
                 if(actionDecision == 0) { 
-                    int u = b.getHealth() - v.getDamage();
-                    b.setHealth(u);
+                    int u = v.getDamage() - 5 + (int)(11 * Math.random());
+                    b.setHealth(b.getHealth() - u);
                     
                     int e = v.getEnergy() - 1;
                     if(e < 0) {
@@ -196,7 +208,7 @@ public class PirateGame {
                     
                     //checks if monster health is greater than 0
                     else if(b.getHealth() > 0) {
-                        JOptionPane.showMessageDialog(null, "You have attacked " + b.getName() + " for " + v.getDamage() + " damage");
+                        JOptionPane.showMessageDialog(null, "You have attacked " + b.getName() + " for " + u + " damage");
                         playerDecision = true;
                         
                         }
@@ -243,12 +255,21 @@ public class PirateGame {
                     }
             
                 if(actionDecision == 2) {
-                    /*
+                    //if potions available in inventory, will use a potion and
+                    //restore 50 health
+                    if(v.getPotionInv() > 0)
+                    {
+                        System.out.println("You used a Potion!");
+                        v.setPotionInv(v.getPotionInv() - 1);
+                        v.setHealth(v.getHealth() + 50);
+                        playerDecision = true;
+                        System.out.println("You now have " + v.getPotionInv()
+                                + " potions left.");
+                    } else {
+                        System.out.println("You do not have any potions!");
+                        playerDecision = false;
+                    }
                     
-                    JAKE DO THIS SHIT, I SWEAR TO GOD IF U FORGET
-                    
-                    
-                    */
                 }
             }
             
@@ -256,7 +277,7 @@ public class PirateGame {
                 if(b.getEnergy() > 0) {
                     
                     if(b.getEnergy() != 10) {
-                        int g = v.getHealth() - b.getDamage();
+                        int g = v.getHealth() - (int)(b.getDamage() * ((double)(100 - v.getArmor()) / 100));
                         if(g < 0) {
                             v.setHealth(0);
                         } else {
@@ -367,8 +388,8 @@ public class PirateGame {
                 
                 //choices for option one
                 if(actionDecision == 0) { 
-                    int b = y.getHealth() - x.getCannonDamage();
-                    y.setHealth(b);
+                    int b = x.getCannonDamage() - 5 + (int)(11 * Math.random());
+                    y.setHealth(y.getHealth() - b);
                     
                     //checks if monster health is less than 0
                     if(y.getHealth() <= 0) {
@@ -380,7 +401,7 @@ public class PirateGame {
                     
                     //checks if monster health is greater than 0
                     else if(y.getHealth() > 0) {
-                        JOptionPane.showMessageDialog(null, "The ship has attacked " + y.getName() + " for " + x.getCannonDamage() + " damage");
+                        JOptionPane.showMessageDialog(null, "The ship has attacked " + y.getName() + " for " + b + " damage");
                         
                         if(x.getHullStatus() < 80) {
                             int a = x.getHullStatus() + 5;
@@ -515,17 +536,27 @@ public class PirateGame {
                     } 
                     
                     
-                } 
-            }
+                    } 
+                }
             
             
 
-        }
+            }
     
             
-    }
+        }
         
         return x;
     
-}
+    }
+    
+    public void setGameStatus(boolean newGameStatus)
+    {
+        gameStatus = newGameStatus;
+    }
+    
+    public static boolean getGameStatus()
+    {
+        return gameStatus;
+    }
 }
