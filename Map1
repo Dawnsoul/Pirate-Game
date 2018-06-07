@@ -59,17 +59,22 @@ public class Map1
     public void sail()
     {
         progress += 2;//2 naut miles taken
+        boolean onLand = false;
+        
         for(SpecialLocation island : locations)
         {
             if(island.getLocation() <= progress && island.getLocation() > (progress - 2))
             {
                 //must enact battle sequence for this island
-            } else {
-                int sMChance = (int)(2 * Math.random());
-                if(sMChance == 1)
-                {
-                    //enact sea monster battle sequence
-                }
+                onLand = true;
+            }
+        }
+        if(!onLand)
+        {
+            int sMChance = (int)(2 * Math.random());
+            if(sMChance == 1)
+            {
+                //enact sea monster battle sequence
             }
         }
         
