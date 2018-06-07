@@ -1,1 +1,512 @@
 
+package PirateGame;
+
+/*
+Driver *
+*/
+
+import EntityInfo.*;
+import ItemInfo.*;
+import MapInfo.*;
+import java.util.*;
+import javax.swing.JOptionPane;
+
+public class PirateGame {
+
+   static Scanner scan = new Scanner(System.in);
+    
+    public static void main(String[] args) {
+            Pirate pirate = new Pirate();
+            Map1 map = new Map1();
+            Ship ship = new Ship();
+            boolean gameStatus = false;
+            
+            System.out.println("Do you wish to start the Pirate Adventurey"
+                    + "? Y/N");
+            String input = scan.next();
+            
+            if(input.equals("Y") || input.equals("y")) {
+                gameStatus = true;
+                for(int i = 0; i < 100; i++) {
+                    System.out.println("\n");
+                }
+            } else if(input.equals("N") || input.equals("n")) {
+                gameStatus = false;
+                for(int i = 0; i < 100; i++) {
+                    System.out.println("\n");
+                }
+                System.out.println("The adventure has ended.");
+                
+            } else {
+                gameStatus = false;
+                for(int i = 0; i < 100; i++) {
+                    System.out.println("\n");
+                }
+                JOptionPane.showMessageDialog(null, "You have entered in a value that is neither Y/N.");
+            }
+            
+            while(gameStatus) {
+                pirate.createPirate(pirate);
+                ship.createShip(ship);
+                
+                System.out.println("Welcome aboard " + " '" + pirate.getStatus() + "' " + " " + pirate.getName() + " on the " + " '" + ship.getName() + "' ");
+                int difficulty = userInput2(1, 3, "Please choose your difficulty level, and the game may begin: 1-3");
+                map.createMap(difficulty);
+              
+            }
+            
+    }
+    
+    //gets an input from the user using the JOptionPane class
+    public static int userInput2(int range1, int range2, String question) {
+        Scanner scan = new Scanner (System.in);
+        boolean complete = false;
+        int input = 0;
+        
+        
+        //while loop repeats question until the user inputs a valid number.
+        while(!complete) {
+            complete = true;
+            
+            //asks the question, and recieves and checks answers all by using JOptionPane.
+            try{
+                input = Integer.parseInt(JOptionPane.showInputDialog(null, question));
+            } catch(Exception e){
+                JOptionPane.showMessageDialog(null, "///////////////////////////////////////////////////////"
+                + "\nPlease enter an appropriate integer " + range1 + "-" + range2
+                + "\n////////////////////////////////////////////////////////");
+                complete = false;
+                continue;
+            
+            }
+            if(input < range1 || input > range2) {
+                complete = false;
+                JOptionPane.showMessageDialog(null, "///////////////////////////////////////////////////////"
+                + "\nPlease enter an appropriate integer " + range1 + "-" + range2
+                + "\n////////////////////////////////////////////////////////");
+            }
+        }
+        return input;
+    }
+    
+      public static Entity[] battleSequence(Entity[] battlefield, String inventory[], Entity items, Entity[] originalBattlefield) {
+        //declaring all variables necessary for method
+        boolean allDead = false;
+        boolean playerFinishedDecision;
+        int enemyAction;
+        String[] originalInventory = {"healthPot", "manaPot"};
+        
+        //loops until all enemies are killed.
+        while(!allDead) {
+            //determines if the player finished his decisions or not
+            playerFinishedDecision = false;
+            
+            //display information about the enemies.
+            System.out.println("A " + battlefield[1].getName() + ", " + battlefield[2].getName() + ", " + battlefield[3].getName()
+                    + " are battling against " + battlefield[0].getName() + ".");
+            System.out.println("-------------------------------------------------------");
+            System.out.println(battlefield[1].getName() + ": Hp = " + battlefield[1].getHealth() + ", Mp = " + battlefield[1].getEnergy() + ", Atk = " + battlefield[1].getDamage());
+            System.out.println(battlefield[2].getName() + ": Hp = " + battlefield[2].getHealth() + ", Mp = " + battlefield[2].getEnergy() + ", Atk = " + battlefield[2].getDamage());
+            System.out.println(battlefield[3].getName() + ": Hp = " + battlefield[3].getHealth() + ", Mp = " + battlefield[3].getEnergy() + ", Atk = " + battlefield[3].getDamage());
+            
+            //Display Information about the player
+            System.out.println("--------------------------------------------------------");
+            System.out.println(battlefield[0].getName() + ": \nHp = " + battlefield[0].getHealth() + "\n Mp = " + battlefield[0].getEnergy() + "\n Atk = " + battlefield[0].getDamage());
+            
+            //battlefield[].get()
+            
+            //ask player for their action and execute it
+            while(!playerFinishedDecision) {
+                //asks what action the player wants to take
+                int actionDecision = (int)userInput2(0, 3, 
+                        "What do you wish to do?"
+                                + "\nNormal Atk = 0"
+                                + "\nHeal = 1"
+                                + "\nSpecial Atk = 2"
+                                + "\nUse Item = 3");
+                
+            //huge if statement for evaluating the action the player wants to take
+                //If normal atk is chosen, player choses a target, and that target is damaged
+                if(actionDecision == 0) {
+                    //player choses target
+                    int target = userInput2(0, 3, 
+                            battlefield[1].getName() + " = 0, " + battlefield[2].getName() + " = 1, " + battlefield[3].getName() + " = 2, Back = 3"
+                                    + "\nChose your target");
+                    
+                    //determines if player changes their mind and if target is already dead
+                    if(target == 3) {
+                        playerFinishedDecision = false;
+                        continue;
+                    } else if(battlefield[target + 1].getName().equals("Empty Space")) {
+                        JOptionPane.showMessageDialog(null, "That enemy is dead. Please chose another enemy.");
+                        playerFinishedDecision = false;
+                        continue;
+                    }
+                    
+                    //determines damage target is to take
+                    int damage = actionValue(battlefield[0], actionDecision);
+                    //target takes damage
+                    battlefield[target + 1].setHealth(battlefield[target + 1].getHealth() - damage);
+                    
+                    //if target's health is less than 0, sets that health to zero
+                    if(battlefield[target + 1].getHealth() < 0) {
+                        battlefield[target + 1].setHealth(0);
+                    }
+                    
+                    //displays information (who did what to whom)
+                    JOptionPane.showMessageDialog(null, battlefield[0].getName() + " has done " + damage + " damage to " + battlefield[target + 1].getName()
+                            + ".\n" + battlefield[target + 1].getName() + " has " + battlefield[target + 1].getHealth() + " health left");
+                    
+                //if heal is chosen, player is healed.
+                } else if(actionDecision == 1) {
+                    //Checks for if the player has enough Mp, and subtracts Mp
+                    if(battlefield[0].getEnergy() < 3) {
+                        JOptionPane.showMessageDialog(null, battlefield[0].getName() + " does not have enough mana for this action. Please chose another option.");
+                        playerFinishedDecision = false;
+                        continue;
+                    } else {
+                        battlefield[0].setEnergy(battlefield[0].getEnergy() - 3);
+                    }
+                    
+                    //determines amount needed to heal
+                    int heal = actionValue(battlefield[0], actionDecision);
+                    
+                    //heals player for a set amount
+                    battlefield[0].setHealth(battlefield[0].getHealth() + heal);
+                    
+                    //if target's health exceeds their max, the health is set to the max
+                    if(battlefield[0].getHealth() > battlefield[0].getMaxHealth()) {
+                        battlefield[0].setHealth(battlefield[0].getMaxHealth());
+                    }
+                    
+                    //displays information (who did what to whom)
+                    JOptionPane.showMessageDialog(null, battlefield[0].getName() + " has healed to " + battlefield[0].getHealth() + " health.");
+                    
+                //if special atk is chosen, player choses a target and that target is damaged
+                } else if(actionDecision == 2) {
+                    //Checks for if the player has enough Mp, and subtracts Mp
+                    if(battlefield[0].getEnergy() < 4) {
+                        JOptionPane.showMessageDialog(null, battlefield[0].getName() + " does not have enough mana for this action. Please chose another option.");
+                        playerFinishedDecision = false;
+                        continue;
+                    } else {
+                        battlefield[0].setEnergy(battlefield[0].getEnergy() - 4);
+                    }
+                    
+                    //player choses target
+                    int target = userInput2(0, 3, 
+                            battlefield[1].getName() + " = 0, " + battlefield[2].getName() + " = 1, " + battlefield[3].getName() + " = 2, Back = 3"
+                                    + "\nChose your target");
+                    
+                    //determines if player changes their mind and if target is already dead
+                    if(target == 3) {
+                        playerFinishedDecision = false;
+                        continue;
+                    } else if(battlefield[target + 1].getName().equals("Empty Space")) {
+                        JOptionPane.showMessageDialog(null, "That enemy is dead. Please chose another enemy.");
+                        playerFinishedDecision = false;
+                        continue;
+                    }
+                    
+                    //determines damage target is to take
+                    int damage = actionValue(battlefield[0], actionDecision);
+                    //target takes that damage
+                    battlefield[target + 1].setHealth(battlefield[target + 1].getHealth() - damage);
+                    
+                    //if target's health is less than 0, sets that health to zero
+                    if(battlefield[target + 1].getHealth() < 0) {
+                        battlefield[target + 1].setHealth(0);
+                    }
+                    
+                    //displays information (who did what to whom)
+                    JOptionPane.showMessageDialog(null, battlefield[0].getName() + " has done " + damage + " damage to " + battlefield[target + 1].getName()
+                            + ".\n" + battlefield[target + 1].getName() + " has " + battlefield[target + 1].getHealth() + " health left");
+                    
+                //if items are chosen, player choses an item to use and uses it
+                } else if(actionDecision == 3) {
+                    int itemUsed = userInput2(0, 2, inventory[0] + " = 0, " + inventory[1] + " = 1, Back = 2"
+                            + "\nChose the Item that you wish to use.");
+                    
+                    //determines if player changes their mind
+                    if(itemUsed == 2) {
+                        playerFinishedDecision = false;
+                        continue;
+                    }
+                    
+                    //takes a course of action depending on the item that was chosen
+                    if(inventory[itemUsed].equals("healthPot") ) {
+                        //heals player fully
+                        battlefield[0].setHealth(battlefield[0].getMaxHealth());
+                        inventory[itemUsed] = "nothing";
+                        
+                        //displays information(who did what to whom)
+                        JOptionPane.showMessageDialog(null, battlefield[0].getName() + " has fully healed.");
+                        
+                    } else if(inventory[itemUsed].equals("manaPot")) {
+                        //heals player's mana fully
+                        battlefield[0].setEnergy(battlefield[0].getMaxMana());
+                        inventory[itemUsed] = "nothing";
+                        
+                        //displays information(who did what to whom)
+                        JOptionPane.showMessageDialog(null, battlefield[0].getName() + " has full mana.");
+                        
+                    } else if(inventory[itemUsed].equals("nothing")) {
+                        //sends player back to decision loop
+                        JOptionPane.showMessageDialog(null, "You cannot use nothing.");
+                        playerFinishedDecision = false;
+                        continue;
+                        
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Item chosen was invalid for some unknown reason(programmer's fault). Please select another option");
+                        playerFinishedDecision = false;
+                        continue;
+                    }
+                    
+                } else {
+                    JOptionPane.showMessageDialog(null,"somethin happened, and idk wat. srry ^_^");
+                    playerFinishedDecision = false;
+                    continue;
+                }
+                
+                playerFinishedDecision = true;
+            }
+            
+            //enemies will act one at a time
+            for(int x = 0; x < 3; x++ ) {
+                
+               //determines who is dead and renames these people
+                for(int y = 1; y < 4; y++) {
+                    if(battlefield[y].getHealth() == 0) {
+                        battlefield[y].setName("Empty Space");
+                    }
+                }
+                
+                //stops empty spaces from acting
+                if(battlefield[x + 1].getName().equals("Empty Space")) {
+                    continue;
+                }
+                
+                //determine each enemy's action first
+                enemyAction = battlefield[x + 1].determineAction(battlefield);
+                
+                //If statement determines what to do based upon the enemy's determined action.
+                if(enemyAction == 0) {
+                    //determines damage player takes
+                    int damage = actionValue(battlefield[x + 1], 0);
+                    
+                    //subtracts damage
+                    battlefield[0].setHealth( battlefield[0].getHealth() - damage );
+                    
+                    //sets player health to 0 if player health is under 0
+                    if(battlefield[0].getHealth() < 0) {
+                        battlefield[0].setHealth(0);
+                    }
+                    
+                    //displays info(who does what to whom)
+                    JOptionPane.showMessageDialog(null, battlefield[x + 1].getName() + " has done " + damage + " damage to " + battlefield[0].getName()
+                            + ".\n" + battlefield[0].getName() + " has " + battlefield[0].getHealth() + " health remaining.");
+                    
+                } else if(enemyAction == 1) {
+                    //determines heal that enemy heales
+                    int heal = actionValue(battlefield[x + 1], 1);
+                    battlefield[x + 1].setEnergy(battlefield[x + 1].getEnergy() - 3);
+                    
+                    //adds health to enemy
+                    int healee = battlefield[x + 1].enemyHealAI(battlefield);
+                    
+                    //extra safeguard if healee is still 0
+                    if(healee == 0) {
+                        healee = (int)(Math.random() * 3 + 1);
+                    }
+                    
+                    
+                    battlefield[healee].setHealth(battlefield[healee].getHealth() + heal);
+                    if(battlefield[healee].getHealth() > battlefield[healee].getMaxHealth()) {
+                        battlefield[healee].setHealth(battlefield[healee].getMaxHealth());
+                    }
+                    
+                    //displays info(who does what to whom)
+                    JOptionPane.showMessageDialog(null, battlefield[healee].getName() + " has been healed by " + battlefield[x + 1].getName()
+                            + ".\n" + battlefield[healee].getName() + " now has " + battlefield[healee].getHealth() + " health.");
+                    
+                } else if(enemyAction == 2) {
+                    
+                    //determines damamge player takes
+                    int damage = actionValue(battlefield[x + 1], 2);
+                    battlefield[x + 1].setEnergy(battlefield[x + 1].getEnergy() - 4);
+                    
+                    //subtracts damage
+                    battlefield[0].setHealth( battlefield[0].getHealth() - damage );
+                    
+                    //sets player health to 0 if player health is under 0
+                    if(battlefield[0].getHealth() < 0) {
+                        battlefield[0].setHealth(0);
+                    }
+                    
+                    //displays info(who does what to whom)
+                    JOptionPane.showMessageDialog(null, battlefield[x + 1].getName() + " has doFne " + damage + " damage to " + battlefield[0].getName()
+                            + ".\n" + battlefield[0].getName() + " has " + battlefield[0].getHealth() + " health remaining.");
+                    
+                } else {//default action is normal atk
+                    //determines damage player takes
+                    int damage = actionValue(battlefield[x + 1], 0);
+                    
+                    //subtracts damage
+                    battlefield[0].setHealth( battlefield[0].getHealth() - damage );
+                    
+                    //sets player health to 0 if player health is under 0
+                    if(battlefield[0].getHealth() < 0) {
+                        battlefield[0].setHealth(0);
+                    }
+                    
+                    //displays info(who does what to whom)
+                    JOptionPane.showMessageDialog(null, battlefield[x + 1].getName() + " has done " + damage + " damage to " + battlefield[0].getName()
+                            + ".\n" + battlefield[0].getName() + " has " + battlefield[0].getHealth() + " health remaining.");
+                    
+                }
+                
+            }
+            
+
+            
+            //determines if player has died
+            if(battlefield[0].getHealth() == 0) {
+                JOptionPane.showMessageDialog(null, "You have died!!!! Restarting battle...");
+                battlefield = originalBattlefield;
+                inventory = originalInventory;
+                continue;
+            }
+            
+            //determines if all enemies are dead
+            if(battlefield[1].getHealth() == 0) {
+                if(battlefield[2].getHealth() == 0) {
+                    if(battlefield[3].getHealth() == 0) {
+                        allDead = true;
+                    }
+                }
+            }
+            
+            //adds +1 mana to all entitiesat the end of a turn
+            for(int x = 0; x < 4; x++) {
+                battlefield[x].setEnergy(battlefield[x].getEnergy() + 1);
+                if(battlefield[x].getEnergy() > battlefield[x].getMaxMana()) {
+                    battlefield[x].setEnergy(battlefield[x].getMaxMana());
+                }
+                
+            }
+            //"clears" the println
+            System.out.println("\n\n\n\n\n\n\n\n\n\n");
+            
+            //loop restarts
+        }
+        
+        
+        //Player is given Items at the end of a battle.
+        //when loop ends player inventory is filled with potions.
+        JOptionPane.showMessageDialog(null, battlefield[0].getName() + " has won the battle!!! "
+                + "\nA Health potion and Mana potion was dropped by the enemies");
+        
+        //Entire if statement fills inventory with potions accordingly
+        if(inventory[0].equals("nothing") && inventory[1].equals("nothing")) {
+            JOptionPane.showMessageDialog(null, "All potions have been collected");
+            
+        } else if(inventory[0].equals("nothing")) {
+            JOptionPane.showMessageDialog(null, "The Health Potion slot has been refilled");
+            
+        } else if(inventory[1].equals("nothing")) {
+            JOptionPane.showMessageDialog(null, "The Mana potion slot has been refilled");
+            
+        } else {
+            JOptionPane.showMessageDialog(null, "Inventory is full, so the potions were left behind.");
+            
+        }
+        
+        //Player recieves unique items here
+        String itemList = "";
+        boolean helmet = true;
+        boolean sword = true;
+        boolean spellBook = true;
+        boolean chosen = false;
+        int uniqueItem = -1;
+        if(items.getHealth() == 1) {
+            itemList = itemList + "\nHelmet = 0";
+        } else {
+            helmet = false;
+        }
+        
+        if(items.getEnergy() == 1) {
+            itemList = itemList + "\nSpellBook = 1";
+        } else {
+            spellBook = false;
+        }
+        
+        if(items.getDamage() == 1) {
+            itemList = itemList + "\nSword = 2";
+        } else {
+            sword = false;
+        }
+        
+        while(!chosen) {
+            int input = userInput2(0, 2, battlefield[0].getName() + "is also able to recieve an unique item. Chose wisely from the items listed: " + itemList);
+            if(input == 0) {
+                if(!helmet) {
+                    JOptionPane.showMessageDialog(null, "That item is unavailable.");
+                    continue;
+                }
+                
+            } else if(input == 1) {
+                if(!spellBook) {
+                    JOptionPane.showMessageDialog(null, "That item is unavailable.");
+                    continue;
+                }
+                
+            } else if(input == 2) {
+                if(!sword) {
+                    JOptionPane.showMessageDialog(null, "That item is unavailable.");
+                    continue;
+                }
+                
+            } else {
+                JOptionPane.showMessageDialog(null, "That item is unavailable.");
+                continue;
+            }
+            
+            chosen = true;
+            uniqueItem = input;
+        }
+        
+        //unique items increase the player's chosed stat by 50%
+        if(uniqueItem == 0) {
+            items.setHealth(0);
+            battlefield[0].setMaxHealth(battlefield[0].getMaxHealth() * 1.5);
+            JOptionPane.showMessageDialog(null, "Your Health has increased.");
+            System.out.println(battlefield[0].getHealth());
+            
+        } else if(uniqueItem == 1) {
+            items.setEnergy(0);
+            battlefield[0].setMaxMana(battlefield[0].getMaxMana() * 1.5);
+            JOptionPane.showMessageDialog(null, "Your Mana has increased.");
+            System.out.println(battlefield[0].getEnergy());
+            
+        } else if(uniqueItem == 2) {
+            items.setAtk(0);
+            battlefield[0].setAtk(battlefield[0].getDamage() * 1.5);
+            JOptionPane.showMessageDialog(null, "Your Atk has increased.");
+            System.out.println(battlefield[0].getDamage());
+            
+        }
+
+        
+        
+        //players stats go back to being full
+        battlefield[0].setHealth(battlefield[0].getMaxHealth() );
+        battlefield[0].setEnergy(battlefield[0].getMaxMana());
+        
+        Entity[] returnArray = {battlefield[0], items};
+        
+        return returnArray;
+    }
+    
+   
+    
+}
