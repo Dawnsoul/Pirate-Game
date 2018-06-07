@@ -91,14 +91,13 @@ public class LandMonster extends Entity{
     
     
     
-    public void specialAttack(Pirate x, LandMonster y) { //flavor text
+    public Pirate specialAttack(Pirate x, LandMonster y) { //flavor text
             int c = gen.nextInt(3);
             JOptionPane.showMessageDialog(null, "The monster has used ..." + LMArray[c]);
-            y.setEnergy(0);
             JOptionPane.showMessageDialog(null, LMDArray[c]);
             
             int r = x.getHealth() - LMDMGArray[c];
             x.setHealth(r);
-            
+            return x;
     }
 }
