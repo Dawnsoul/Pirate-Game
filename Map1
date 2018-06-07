@@ -55,22 +55,7 @@ public class Map1
         "Marine Ford", "Futohx Chain", "Wano Country", 
         "Tryfaq Enclave"));
     
-    //takes in difficulty and generates map
-    public void sail()
-    {
-        progress += 2;//2 naut miles taken
-        for(SpecialLocation island : locations)
-        {
-            if(island.getLocation() <= progress && island.getLocation() > (progress - 2))
-            {
-                //must enact battle sequence for this island
-            }
-        }
-        
-    }
-    
-    
-    
+  
     public void sail()
     {
         progress += 2;//2 naut miles taken
