@@ -48,9 +48,6 @@ Change Log #7 :
 
 Change Log #8 :
 - Added Energy Costs
-
-Change Log #9 :
-- Changed too much, i lost the will to comment
 */
 
 public class SeaMonster extends Entity{
@@ -100,6 +97,10 @@ public class SeaMonster extends Entity{
         x.setDamage(gen.nextInt(15) + 1);
      */
    
+   public String getSAName(int x) {
+       return SMArray[x];
+       
+   }
     
    public static SeaMonster createSM() { 
         SeaMonster x = new SeaMonster();
@@ -115,13 +116,14 @@ public class SeaMonster extends Entity{
 
     }
     
-    public void specialAttack() { //flavor text
-            System.out.println("The monster has used its special attack...");
-            int y = gen.nextInt(5);
-            energy = energy - SMCArray[y];
-            JOptionPane.showMessageDialog(null, SMArray[y]);
-            System.out.println(SMDArray[y]);
+    public void specialAttack(Ship x, SeaMonster y) { //flavor text
+            int c = gen.nextInt(5);
+            JOptionPane.showMessageDialog(null, "The monster has used ... " + SMArray[c]);
+            y.setEnergy(0);
+            JOptionPane.showMessageDialog(null, SMDArray[c]);
             
+            int h = x.getHullStatus() - SMDMGArray[c];
+            x.setHullStatus(h);
     }
     
     
