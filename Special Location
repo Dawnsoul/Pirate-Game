@@ -14,6 +14,8 @@ Change Log #2 :
 Changed Item array list into multiple attributes of special location
 Removed Item Array list
 
+Change log #3 :
+added all item materials.
 */
 
 
@@ -21,30 +23,31 @@ public class SpecialLocation {
     private String name;
     private int location;
     private ArrayList<Entity> monsters;
-    protected boolean hasArmor;
-    protected int weaponMat;
-    protected int armorMat;
+    private boolean hasArmor;
+    private int weaponMat;
+    private int armorMat;
+    private int shipMat;
 
     //constructor without attributes
     public SpecialLocation() {
         name = null;
         location = 0;
-        monsters = new ArrayList<Entity>();
+        monsters = null;
         hasArmor = false;
         weaponMat = 0;
         armorMat = 0;
+        shipMat = 0;
     }
 
     //constructor with all attributes
-    public SpecialLocation(String newName, int newLocation, ArrayList<Entity> newMonsters, boolean newHasArmor, int newWeaponMat
-    , int newArmorMat) {
-    
+    public SpecialLocation(String newName, int newLocation, ArrayList<Entity> newMonsters, boolean newHasArmor, int newWeaponMat, int newArmorMat, int newShipMat) {
         name = newName;
         location = newLocation;
         monsters = newMonsters;
         hasArmor = newHasArmor;
         weaponMat = newWeaponMat;
         armorMat = newArmorMat;
+        shipMat = newShipMat;
     }
 
     //setter for name
@@ -76,7 +79,7 @@ public class SpecialLocation {
     public ArrayList<Entity> getMonsters() {
         return monsters;
     }
-    
+
     //setter for hasArmor
     public void setHasArmor(boolean newHasArmor) {
         hasArmor = newHasArmor;
@@ -86,7 +89,7 @@ public class SpecialLocation {
     public boolean getHasArmor() {
         return hasArmor;
     }
-    
+
     //setter for weaponMat
     public void setWeaponMat(int newWeaponMat) {
         weaponMat = newWeaponMat;
@@ -107,9 +110,19 @@ public class SpecialLocation {
         return armorMat;
     }
 
+    //setter for shipMat
+    public void setShipMat(int newShipMat) {
+        shipMat = newShipMat;
+    }
+
+    //getter for shipMat
+    public int getShipMat() {
+        return shipMat;
+    }
+
     //overrides toString method of Object class to neatly output SpecialLocation object
     public String toString() {
-        return "name = " + name + "; " + "location = " + location + "; " + "loot = " + loot + "; " + "monsters = " + monsters;
+        return "name = " + name + "; " + "location = " + location + "; " + "monsters = " + monsters + "; " + "hasArmor = " + hasArmor + "; " + "weaponMat = " + weaponMat + "; " + "armorMat = " + armorMat + "; " + "shipMat = " + shipMat;
     }
 
 }
