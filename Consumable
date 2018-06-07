@@ -1,5 +1,4 @@
-//Jake Truongcao
-package pirategame;
+package ItemInfo;
 
 public class Consumable extends Item{
     //need to have a way to indicate what stats are being adjusted
